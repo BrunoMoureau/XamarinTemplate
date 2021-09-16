@@ -5,13 +5,4 @@
         <LangVersion>9</LangVersion>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Mvvm\Contracts" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="LightInject" Version="6.4.0" />
-      <PackageReference Include="LightInject.AutoFactory" Version="2.0.0" />
-    </ItemGroup>
-
 </Project>

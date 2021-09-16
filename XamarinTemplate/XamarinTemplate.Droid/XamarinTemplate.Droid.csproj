@@ -6,8 +6,8 @@
         <ProjectGuid>{88DCB7D2-DBFE-42DC-87CE-86B96EDBD9A2}</ProjectGuid>
         <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
         <OutputType>Library</OutputType>
-        <RootNamespace>XamarinTemplate.Android</RootNamespace>
-        <AssemblyName>XamarinTemplate.Android</AssemblyName>
+        <RootNamespace>XamarinTemplate.Droid</RootNamespace>
+        <AssemblyName>XamarinTemplate.Droid</AssemblyName>
         <AndroidApplication>True</AndroidApplication>
         <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
         <AndroidResgenClass>Resource</AndroidResgenClass>

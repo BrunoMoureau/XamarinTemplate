@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.Contracts.Views;
-using Xamarin.Basics.Mvvm.Models;
 
 namespace Xamarin.Basics.Navigations
 {
@@ -9,26 +8,22 @@ namespace Xamarin.Basics.Navigations
         Task SetRootAsync<TView>() where TView : IRootView;
 
         Task SetRootAsync<TView, TViewModelParams>(TViewModelParams parameters)
-            where TView : IRootView
-            where TViewModelParams : ViewModelParams;
+            where TView : IRootView;
 
         Task SetStackRootAsync<TView>() where TView : IStackView;
 
         Task SetStackRootAsync<TView, TViewModelParams>(TViewModelParams parameters)
-            where TView : IStackView
-            where TViewModelParams : ViewModelParams;
+            where TView : IStackView;
 
         Task PushAsync<TView>(bool animated = true) where TView : IStackView;
 
         Task PushAsync<TView, TViewModelParams>(TViewModelParams parameters, bool animated = true)
-            where TView : IStackView
-            where TViewModelParams : ViewModelParams;
+            where TView : IStackView;
 
         Task PushModalAsync<TView>(bool animated = true) where TView : IModalView;
 
         Task PushModalAsync<TView, TViewModelParams>(TViewModelParams parameters, bool animated = true)
-            where TView : IModalView
-            where TViewModelParams : ViewModelParams;
+            where TView : IModalView;
 
         Task PopAsync(bool animated = true);
         Task PopModalAsync(bool animated = true);

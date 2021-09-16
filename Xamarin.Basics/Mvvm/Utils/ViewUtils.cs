@@ -1,25 +1,28 @@
-﻿using Xamarin.Basics.Mvvm.Contracts.Views;
+﻿using System;
+using System.Collections.Generic;
+using Xamarin.Basics.Mvvm.Contracts.Views;
 
 namespace Xamarin.Basics.Mvvm.Utils
 {
     public static class ViewUtils
     {
-        public static void SubscribeServices(IView view)
+        public static void Open(IView view)
         {
-            view.SubscribeServices();
+            view?.Open();
+            view?.ViewModel?.Open();
         }
 
-        public static void UnsubscribeServices(IView view)
+        public static void Close(IView view)
         {
-            view.UnsubscribeServices();
-            ViewModelUtils.DisposeViewModel(view.BindingContext);
+            view?.Close();
+            view?.ViewModel?.Close();
         }
 
-        public static void UnsubscribeServices(params IView[] views)
+        public static void Close(IEnumerable<IView> views)
         {
             foreach (var view in views)
             {
-                UnsubscribeServices(view);
+                Close(view);
             }
         }
     }

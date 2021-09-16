@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.Contracts.Views;
 using Xamarin.Basics.Navigations.Services;
@@ -13,7 +14,7 @@ namespace XamarinTemplate.Navigations
             var mainPage = Application.Current.MainPage;
             return mainPage switch
             {
-                ContentPage contentPage => new[] {contentPage as IView},
+                ContentPage contentPage => new[] { contentPage as IView },
                 NavigationPage navigationPage => navigationPage.Navigation.NavigationStack?.OfType<IView>().ToArray(),
                 _ => new IView[0]
             };

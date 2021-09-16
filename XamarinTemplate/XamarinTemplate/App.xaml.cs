@@ -1,9 +1,11 @@
-﻿using LightInject;
+﻿using DryIoc;
 using Xamarin.Basics.Navigations;
 using Xamarin.Basics.Navigations.Factories;
 using Xamarin.Basics.Navigations.Services;
 using Xamarin.Forms.Xaml;
 using XamarinTemplate.Navigations;
+using XamarinTemplate.Views.List;
+using XamarinTemplate.Views.Main;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -11,20 +13,24 @@ namespace XamarinTemplate
 {
     public partial class App
     {
+        public static Container Container { get; private set; }
+        
         public App()
         {
             InitializeComponent();
 
-            var container = new ServiceContainer();
-            container.Register<INavigationService, NavigationService>();
-            container.Register<ICurrentNavigation, CurrentNavigation>();
-            container.Register<MainPage>();
+            Container = new Container();
+            Container.Register<INavigationService, NavigationService>();
+            Container.Register<ICurrentNavigation, CurrentNavigation>();
+            Container.Register<MainView>();
+            Container.Register<MainViewModel>();
+            Container.Register<ListView>();
+            Container.Register<ListViewModel>();
             
-            container.EnableAutoFactories();
-            container.RegisterAutoFactory<IViewFactory>();
-
-            var navigationService = container.GetInstance<INavigationService>();
-            navigationService.SetRootAsync<MainPage>();
+            Container.Register<IViewFactory, ViewFactory>();
+            
+            var navigationService = Container.Resolve<INavigationService>();
+            navigationService.SetStackRootAsync<MainView>();
         }
 
         protected override void OnStart()

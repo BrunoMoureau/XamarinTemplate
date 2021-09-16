@@ -2,7 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 
-namespace XamarinTemplate.Android
+namespace XamarinTemplate.Droid
 {
     [Activity(Label = "XamarinTemplate", Theme = "@style/MainTheme", MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
@@ -14,7 +14,7 @@ namespace XamarinTemplate.Android
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
     }
