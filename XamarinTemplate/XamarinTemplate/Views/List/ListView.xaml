@@ -3,11 +3,31 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:list="clr-namespace:XamarinTemplate.Views.List;assembly=XamarinTemplate"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             xmlns:models="clr-namespace:XamarinTemplate.Views.List.Models;assembly=XamarinTemplate"
              x:Class="XamarinTemplate.Views.List.ListView"
              x:DataType="{x:Type list:ListViewModel}">
 
     <StackLayout>
-        <Label Text="List"/>
-        <CollectionView ItemsSource="{Binding Foes}" />
+        <Label Text="List" />
+        
+        <CollectionView ItemsSource="{Binding Photos}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10"/>    
+            </CollectionView.ItemsLayout>
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{system:Type models:Photo}">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="{Binding ThumbnailUrl}"
+                               HeightRequest="50"
+                               WidthRequest="50"
+                               BackgroundColor="Yellow"/>
+
+                        <Label Text="{Binding Title}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </StackLayout>
 </ContentPage>

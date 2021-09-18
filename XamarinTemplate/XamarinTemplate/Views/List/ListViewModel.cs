@@ -1,29 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Basics.CancellationToken;
 using Xamarin.Basics.Mvvm.Contracts.ViewModels;
 using Xamarin.CommunityToolkit.ObjectModel;
+using XamarinTemplate.Api;
+using XamarinTemplate.Views.List.Models;
 
 namespace XamarinTemplate.Views.List
 {
-    public class Foo
-    {
-        public string Test { get; }
-
-        public Foo()
-        {
-            Test = Guid.NewGuid().ToString();
-        }
-    }
-
     public class ListViewModel : ObservableObject, IViewModel
     {
-        private List<Foo> _foes;
+        private readonly IPhotoService _photoService;
+        private CancellationTokenSource _getPhotosCancellationTokenSource;
 
-        public List<Foo> Foes
+        private List<Photo> _photos;
+
+        public List<Photo> Photos
         {
-            get => _foes;
-            set => SetProperty(ref _foes, value);
+            get => _photos;
+            set => SetProperty(ref _photos, value);
+        }
+
+        public ListViewModel(IPhotoService photoService)
+        {
+            _photoService = photoService;
         }
 
         public void Open()
@@ -32,25 +34,16 @@ namespace XamarinTemplate.Views.List
 
         public async Task InitializeAsync(object @params)
         {
-            var foes = await Task.Run(GetFoes);
+            CancellationTokenHelper.GenerateTokenSource(ref _getPhotosCancellationTokenSource);
+            var photos = await Task.Run(() => _photoService.GetPhotosAsync(_getPhotosCancellationTokenSource.Token),
+                _getPhotosCancellationTokenSource.Token);
 
-            Foes = foes;
-        }
-
-        private List<Foo> GetFoes()
-        {
-            var foes = new List<Foo>();
-            for (int i = 0; i < 1000000; i++)
-            {
-                foes.Add(new());
-            }
-
-            return foes;
+            Photos = photos;
         }
 
         public void Close()
         {
-            //todo cancellationtoken utils   
+            CancellationTokenHelper.CancelTokenSource(_getPhotosCancellationTokenSource);
         }
     }
 }

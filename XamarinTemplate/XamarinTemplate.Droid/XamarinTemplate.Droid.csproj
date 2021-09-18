@@ -45,13 +45,20 @@
         <Reference Include="Mono.Android" />
         <Reference Include="System" />
         <Reference Include="System.Core" />
+        <Reference Include="System.Net.Http" />
         <Reference Include="System.Xml.Linq" />
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+        <PackageReference Include="glidex.forms" Version="2.1.0.470" />
+        <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.2.4.1" />
+        <PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.8" />
+        <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.1" />
+        <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Dependencies\HttpMessageHandlerService.cs" />
         <Compile Include="MainActivity.cs" />
         <Compile Include="Resources\Resource.Designer.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,8 +69,6 @@
         <None Include="Properties\AndroidManifest.xml" />
     </ItemGroup>
     <ItemGroup>
-        <AndroidResource Include="Resources\layout\Tabbar.axml" />
-        <AndroidResource Include="Resources\layout\Toolbar.axml" />
         <AndroidResource Include="Resources\values\styles.xml" />
         <AndroidResource Include="Resources\values\colors.xml" />
     </ItemGroup>
