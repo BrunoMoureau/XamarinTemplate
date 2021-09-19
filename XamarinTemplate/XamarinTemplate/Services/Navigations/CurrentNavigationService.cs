@@ -4,9 +4,9 @@ using Xamarin.Basics.Mvvm.Contracts.Views;
 using Xamarin.Basics.Navigations.Services;
 using Xamarin.Forms;
 
-namespace XamarinTemplate.Navigations
+namespace XamarinTemplate.Services.Navigations
 {
-    public class CurrentNavigation : ICurrentNavigation
+    public class CurrentNavigationService : ICurrentNavigationService
     {
         public IView[] GetViews()
         {

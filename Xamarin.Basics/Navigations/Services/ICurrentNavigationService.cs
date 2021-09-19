@@ -3,7 +3,7 @@ using Xamarin.Basics.Mvvm.Contracts.Views;
 
 namespace Xamarin.Basics.Navigations.Services
 {
-    public interface ICurrentNavigation
+    public interface ICurrentNavigationService
     {
         IView[] GetViews();
         void SetRootView<TView>(TView view) where TView : IRootView;

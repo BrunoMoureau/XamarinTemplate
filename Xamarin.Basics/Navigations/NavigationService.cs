@@ -8,12 +8,12 @@ namespace Xamarin.Basics.Navigations
 {
     public class NavigationService : INavigationService
     {
-        private readonly ICurrentNavigation _currentNavigation;
+        private readonly ICurrentNavigationService _currentNavigationService;
         private readonly IViewFactory _viewFactory;
 
-        public NavigationService(ICurrentNavigation currentNavigation, IViewFactory viewFactory)
+        public NavigationService(ICurrentNavigationService currentNavigationService, IViewFactory viewFactory)
         {
-            _currentNavigation = currentNavigation;
+            _currentNavigationService = currentNavigationService;
             _viewFactory = viewFactory;
         }
 
@@ -22,10 +22,10 @@ namespace Xamarin.Basics.Navigations
 
         public Task SetRootAsync<TView, TViewModelParams>(TViewModelParams parameters) where TView : IRootView
         {
-            var currentViews = _currentNavigation.GetViews();
+            var currentViews = _currentNavigationService.GetViews();
             var view = _viewFactory.Create<TView>();
 
-            _currentNavigation.SetRootView(view);
+            _currentNavigationService.SetRootView(view);
 
             ViewUtils.Close(currentViews);
             ViewUtils.Open(view);
@@ -38,10 +38,10 @@ namespace Xamarin.Basics.Navigations
 
         public Task SetStackRootAsync<TView, TViewModelParams>(TViewModelParams parameters) where TView : IStackView
         {
-            var currentViews = _currentNavigation.GetViews();
+            var currentViews = _currentNavigationService.GetViews();
             var view = _viewFactory.Create<TView>();
 
-            _currentNavigation.SetStackView(view);
+            _currentNavigationService.SetStackView(view);
 
             ViewUtils.Close(currentViews);
             ViewUtils.Open(view);
@@ -55,10 +55,10 @@ namespace Xamarin.Basics.Navigations
         public async Task PushAsync<TView, TViewModelParams>(TViewModelParams parameters, bool animated = true)
             where TView : IStackView
         {
-            if (!_currentNavigation.HasRootStackView()) return;
+            if (!_currentNavigationService.HasRootStackView()) return;
 
             var view = _viewFactory.Create<TView>();
-            await _currentNavigation.PushViewAsync(view, animated);
+            await _currentNavigationService.PushViewAsync(view, animated);
             
             ViewUtils.Open(view);
 
@@ -71,10 +71,10 @@ namespace Xamarin.Basics.Navigations
         public async Task PushModalAsync<TView, TViewModelParams>(TViewModelParams parameters, bool animated = true)
             where TView : IModalView
         {
-            if (!_currentNavigation.HasRootStackView()) return;
+            if (!_currentNavigationService.HasRootStackView()) return;
 
             var modalView = _viewFactory.Create<TView>();
-            await _currentNavigation.PushModalViewAsync(modalView, animated);
+            await _currentNavigationService.PushModalViewAsync(modalView, animated);
 
             ViewUtils.Open(modalView);
 
@@ -83,35 +83,35 @@ namespace Xamarin.Basics.Navigations
 
         public async Task PopAsync(bool animated = true)
         {
-            if (!_currentNavigation.HasRootStackView()) return;
+            if (!_currentNavigationService.HasRootStackView()) return;
             
-            var lastView = _currentNavigation.GetLastViewOrDefault();
-            await _currentNavigation.PopViewAsync(animated);
+            var lastView = _currentNavigationService.GetLastViewOrDefault();
+            await _currentNavigationService.PopViewAsync(animated);
 
             ViewUtils.Close(lastView);
         }
 
         public async Task PopModalAsync(bool animated = true)
         {
-            if (!_currentNavigation.HasRootStackView()) return;
+            if (!_currentNavigationService.HasRootStackView()) return;
 
-            var lastModalView = _currentNavigation.GetLastModalViewOrDefault();
-            await _currentNavigation.PopModalViewAsync(animated);
+            var lastModalView = _currentNavigationService.GetLastModalViewOrDefault();
+            await _currentNavigationService.PopModalViewAsync(animated);
 
             ViewUtils.Close(lastModalView);
         }
 
         public async Task PopToRootAsync(bool animated = true)
         {
-            if (!_currentNavigation.HasRootStackView()) return;
+            if (!_currentNavigationService.HasRootStackView()) return;
 
-            var currentViews = _currentNavigation.GetViews();
+            var currentViews = _currentNavigationService.GetViews();
             
-            await _currentNavigation.PopAllAsync(animated);
+            await _currentNavigationService.PopAllAsync(animated);
 
             ViewUtils.Close(currentViews);
         }
 
-        public bool AnyModalDisplayed() => _currentNavigation.HasModalView();
+        public bool AnyModalDisplayed() => _currentNavigationService.HasModalView();
     }
 }

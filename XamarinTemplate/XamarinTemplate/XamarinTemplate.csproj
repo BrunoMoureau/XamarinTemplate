@@ -11,7 +11,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Autofac" Version="6.2.0" />
+        <PackageReference Include="DryIoc" Version="4.8.1" />
         <PackageReference Include="Xamarin.CommunityToolkit" Version="1.3.0-pre2" />
         <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
     </ItemGroup>
