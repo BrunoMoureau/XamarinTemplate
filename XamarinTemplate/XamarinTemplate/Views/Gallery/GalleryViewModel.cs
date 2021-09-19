@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Basics.CancellationToken;
-using Xamarin.Basics.Mvvm.Contracts.ViewModels;
+using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.CommunityToolkit.ObjectModel;
 using XamarinTemplate.Api;
 using XamarinTemplate.Views.Gallery.Models;
@@ -27,10 +27,6 @@ namespace XamarinTemplate.Views.Gallery
             _photoService = photoService;
         }
 
-        public void Open()
-        {
-        }
-
         public async Task InitializeAsync(object @params)
         {
             CancellationTokenHelper.GenerateTokenSource(ref _getPhotosCancellationTokenSource);
@@ -40,7 +36,7 @@ namespace XamarinTemplate.Views.Gallery
             Photos = photos;
         }
 
-        public void Close()
+        public void Unload()
         {
             CancellationTokenHelper.CancelTokenSource(_getPhotosCancellationTokenSource);
         }

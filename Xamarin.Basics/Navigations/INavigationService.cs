@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Xamarin.Basics.Mvvm.Contracts.Views;
+using Xamarin.Basics.Mvvm.Views;
 
 namespace Xamarin.Basics.Navigations
 {

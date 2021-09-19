@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Xamarin.Basics.Mvvm.Contracts.Views;
+using Xamarin.Basics.Mvvm.Views;
 
 namespace Xamarin.Basics.Navigations.Services
 {
@@ -13,7 +13,7 @@ namespace Xamarin.Basics.Navigations.Services
         public IView GetLastViewOrDefault();
         public IView GetLastModalViewOrDefault();
         Task PushViewAsync<TView>(TView view, bool animated = true) where TView : IStackView;
-        Task PushModalViewAsync<TView>(TView view, bool animated) where TView : IModalView;
+        Task PushModalViewAsync<TView>(TView view, bool animated = true) where TView : IModalView;
         Task PopViewAsync(bool animated);
         Task PopModalViewAsync(bool animated);
         Task PopAllAsync(bool animated);

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using DryIoc;
-using Xamarin.Basics.Mvvm.Contracts.ViewModels;
-using Xamarin.Basics.Mvvm.Contracts.Views;
+using Xamarin.Basics.Mvvm.ViewModels;
+using Xamarin.Basics.Mvvm.Views;
 using Xamarin.Basics.Navigations;
 using Xamarin.Basics.Navigations.Factories;
 using Xamarin.Basics.Navigations.Services;

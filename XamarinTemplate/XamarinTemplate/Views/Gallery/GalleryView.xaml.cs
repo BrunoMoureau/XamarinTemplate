@@ -1,4 +1,4 @@
-﻿using Xamarin.Basics.Mvvm.Contracts.Views;
+﻿using Xamarin.Basics.Mvvm.Views;
 
 namespace XamarinTemplate.Views.Gallery
 {

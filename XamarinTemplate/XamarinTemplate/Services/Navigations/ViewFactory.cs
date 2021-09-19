@@ -1,4 +1,4 @@
-﻿using Xamarin.Basics.Mvvm.Contracts.Views;
+﻿using Xamarin.Basics.Mvvm.Views;
 using Xamarin.Basics.Navigations.Factories;
 using XamarinTemplate.Services.Containers;
 

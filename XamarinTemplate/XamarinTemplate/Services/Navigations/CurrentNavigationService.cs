@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Basics.Mvvm.Contracts.Views;
+using Xamarin.Basics.Mvvm.Views;
 using Xamarin.Basics.Navigations.Services;
 using Xamarin.Forms;
 

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Xamarin.Basics.Mvvm.Contracts.Views;
-using Xamarin.Basics.Mvvm.Utils;
+using Xamarin.Basics.Mvvm.ViewModels.Utils;
+using Xamarin.Basics.Mvvm.Views;
+using Xamarin.Basics.Mvvm.Views.Utils;
 using Xamarin.Basics.Navigations.Factories;
 using Xamarin.Basics.Navigations.Services;
 
@@ -27,8 +28,8 @@ namespace Xamarin.Basics.Navigations
 
             _currentNavigationService.SetRootView(view);
 
-            ViewUtils.Close(currentViews);
-            ViewUtils.Open(view);
+            ViewUtils.Unload(currentViews);
+            ViewUtils.Load(view);
 
             return ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
         }
@@ -43,8 +44,8 @@ namespace Xamarin.Basics.Navigations
 
             _currentNavigationService.SetStackView(view);
 
-            ViewUtils.Close(currentViews);
-            ViewUtils.Open(view);
+            ViewUtils.Unload(currentViews);
+            ViewUtils.Load(view);
 
             return ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
         }
@@ -60,7 +61,7 @@ namespace Xamarin.Basics.Navigations
             var view = _viewFactory.Create<TView>();
             await _currentNavigationService.PushViewAsync(view, animated);
             
-            ViewUtils.Open(view);
+            ViewUtils.Load(view);
 
             await ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
         }
@@ -76,7 +77,7 @@ namespace Xamarin.Basics.Navigations
             var modalView = _viewFactory.Create<TView>();
             await _currentNavigationService.PushModalViewAsync(modalView, animated);
 
-            ViewUtils.Open(modalView);
+            ViewUtils.Load(modalView);
 
             await ViewModelUtils.InitializeAsync(modalView?.ViewModel, parameters);
         }
@@ -88,7 +89,7 @@ namespace Xamarin.Basics.Navigations
             var lastView = _currentNavigationService.GetLastViewOrDefault();
             await _currentNavigationService.PopViewAsync(animated);
 
-            ViewUtils.Close(lastView);
+            ViewUtils.Unload(lastView);
         }
 
         public async Task PopModalAsync(bool animated = true)
@@ -98,7 +99,7 @@ namespace Xamarin.Basics.Navigations
             var lastModalView = _currentNavigationService.GetLastModalViewOrDefault();
             await _currentNavigationService.PopModalViewAsync(animated);
 
-            ViewUtils.Close(lastModalView);
+            ViewUtils.Unload(lastModalView);
         }
 
         public async Task PopToRootAsync(bool animated = true)
@@ -109,7 +110,7 @@ namespace Xamarin.Basics.Navigations
             
             await _currentNavigationService.PopAllAsync(animated);
 
-            ViewUtils.Close(currentViews);
+            ViewUtils.Unload(currentViews);
         }
 
         public bool AnyModalDisplayed() => _currentNavigationService.HasModalView();

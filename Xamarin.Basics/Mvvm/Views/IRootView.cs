@@ -1,4 +1,4 @@
-﻿namespace Xamarin.Basics.Mvvm.Contracts.Views
+﻿namespace Xamarin.Basics.Mvvm.Views
 {
     public interface IRootView : IView
     {

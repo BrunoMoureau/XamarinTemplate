@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Xamarin.Basics.Mvvm.Contracts.ViewModels;
 
-namespace Xamarin.Basics.Mvvm.Utils
+namespace Xamarin.Basics.Mvvm.ViewModels.Utils
 {
     public static class ViewModelUtils
     {
