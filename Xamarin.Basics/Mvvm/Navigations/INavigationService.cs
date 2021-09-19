@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.Views;
 
-namespace Xamarin.Basics.Navigations
+namespace Xamarin.Basics.Mvvm.Navigations
 {
     public interface INavigationService
     {
@@ -17,7 +17,7 @@ namespace Xamarin.Basics.Navigations
 
         Task PushAsync<TView>(bool animated = true) where TView : IStackView;
 
-        Task PushAsync<TView, TViewModelParams>(TViewModelParams parameters, bool animated = true)
+        Task PushAsync<TView, TParams>(TParams parameters, bool animated = true)
             where TView : IStackView;
 
         Task PushModalAsync<TView>(bool animated = true) where TView : IModalView;

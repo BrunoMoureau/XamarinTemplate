@@ -1,12 +1,12 @@
 ﻿using Xamarin.Basics.Mvvm.Views;
 
-namespace XamarinTemplate.Views.Main
+namespace XamarinTemplate.Features.Gallery
 {
-    public partial class MainView : IStackView
+    public partial class GalleryView : IStackView
     {
         public bool HasNavigationBar => true;
 
-        public MainView(MainViewModel viewModel)
+        public GalleryView(GalleryViewModel viewModel)
         {
             InitializeComponent();
             BindingContext = viewModel;

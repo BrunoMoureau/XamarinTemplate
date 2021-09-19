@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
+using Xamarin.Basics.Mvvm.Navigations.Factories;
+using Xamarin.Basics.Mvvm.Navigations.Services;
 using Xamarin.Basics.Mvvm.ViewModels.Utils;
 using Xamarin.Basics.Mvvm.Views;
 using Xamarin.Basics.Mvvm.Views.Utils;
-using Xamarin.Basics.Navigations.Factories;
-using Xamarin.Basics.Navigations.Services;
 
-namespace Xamarin.Basics.Navigations
+namespace Xamarin.Basics.Mvvm.Navigations
 {
     public class NavigationService : INavigationService
     {
@@ -21,7 +21,7 @@ namespace Xamarin.Basics.Navigations
         public Task SetRootAsync<TView>() where TView : IRootView
             => SetRootAsync<TView, object>(null);
 
-        public Task SetRootAsync<TView, TViewModelParams>(TViewModelParams parameters) where TView : IRootView
+        public Task SetRootAsync<TView, TParams>(TParams parameters) where TView : IRootView
         {
             var currentViews = _currentNavigationService.GetViews();
             var view = _viewFactory.Create<TView>();
@@ -37,7 +37,7 @@ namespace Xamarin.Basics.Navigations
         public Task SetStackRootAsync<TView>() where TView : IStackView
             => SetStackRootAsync<TView, object>(null);
 
-        public Task SetStackRootAsync<TView, TViewModelParams>(TViewModelParams parameters) where TView : IStackView
+        public Task SetStackRootAsync<TView, TParams>(TParams parameters) where TView : IStackView
         {
             var currentViews = _currentNavigationService.GetViews();
             var view = _viewFactory.Create<TView>();
@@ -53,7 +53,7 @@ namespace Xamarin.Basics.Navigations
         public Task PushAsync<TView>(bool animated = true) where TView : IStackView
             => PushAsync<TView, object>(null, animated);
 
-        public async Task PushAsync<TView, TViewModelParams>(TViewModelParams parameters, bool animated = true)
+        public async Task PushAsync<TView, TParams>(TParams parameters, bool animated = true)
             where TView : IStackView
         {
             if (!_currentNavigationService.HasRootStackView()) return;
@@ -69,7 +69,7 @@ namespace Xamarin.Basics.Navigations
         public Task PushModalAsync<TView>(bool animated = true) where TView : IModalView
             => PushModalAsync<TView, object>(null, animated);
 
-        public async Task PushModalAsync<TView, TViewModelParams>(TViewModelParams parameters, bool animated = true)
+        public async Task PushModalAsync<TView, TParams>(TParams parameters, bool animated = true)
             where TView : IModalView
         {
             if (!_currentNavigationService.HasRootStackView()) return;

@@ -2,12 +2,12 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:XamarinTemplate.Views.Main;assembly=XamarinTemplate"
-             x:Class="XamarinTemplate.Views.Main.MainView"
+             xmlns:viewModels="clr-namespace:XamarinTemplate.Features.Main;assembly=XamarinTemplate"
+             x:Class="XamarinTemplate.Features.Main.MainView"
              x:DataType="{x:Type viewModels:MainViewModel}">
 
     <StackLayout>
         <Button Text="Show Gallery"
-                Command="{Binding ListCommand}" />
+                Command="{Binding GalleryCommand}" />
     </StackLayout>
 </ContentPage>

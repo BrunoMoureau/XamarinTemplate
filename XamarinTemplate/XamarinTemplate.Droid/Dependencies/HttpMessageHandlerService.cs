@@ -3,7 +3,7 @@ using System.Net.Http;
 using Xamarin.Android.Net;
 using Xamarin.Forms;
 using XamarinTemplate.Droid.Dependencies;
-using XamarinTemplate.Interfaces;
+using XamarinTemplate.Services.HttpMessageHandler;
 
 [assembly: Dependency(typeof(HttpMessageHandlerService))]
 namespace XamarinTemplate.Droid.Dependencies

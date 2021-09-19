@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Xamarin.Basics.CancellationToken;
+using Xamarin.Basics.Helpers;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.CommunityToolkit.ObjectModel;
-using XamarinTemplate.Api;
-using XamarinTemplate.Views.Gallery.Models;
+using XamarinTemplate.Features.Gallery.Models;
+using XamarinTemplate.Repositories.Photos;
 
-namespace XamarinTemplate.Views.Gallery
+namespace XamarinTemplate.Features.Gallery
 {
     public class GalleryViewModel : ObservableObject, IViewModel
     {

@@ -2,9 +2,9 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:gallery="clr-namespace:XamarinTemplate.Views.Gallery;assembly=XamarinTemplate"
-             xmlns:models="clr-namespace:XamarinTemplate.Views.Gallery.Models;assembly=XamarinTemplate"
-             x:Class="XamarinTemplate.Views.Gallery.GalleryView"
+             xmlns:gallery="clr-namespace:XamarinTemplate.Features.Gallery;assembly=XamarinTemplate"
+             xmlns:models="clr-namespace:XamarinTemplate.Features.Gallery.Models;assembly=XamarinTemplate"
+             x:Class="XamarinTemplate.Features.Gallery.GalleryView"
              x:DataType="{x:Type gallery:GalleryViewModel}">
 
     <StackLayout>

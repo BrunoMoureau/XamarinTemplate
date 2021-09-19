@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Reflection;
 using DryIoc;
+using Xamarin.Basics.Mvvm.Navigations;
+using Xamarin.Basics.Mvvm.Navigations.Factories;
+using Xamarin.Basics.Mvvm.Navigations.Services;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.Basics.Mvvm.Views;
-using Xamarin.Basics.Navigations;
-using Xamarin.Basics.Navigations.Factories;
-using Xamarin.Basics.Navigations.Services;
 using Xamarin.Forms;
 using XamarinTemplate.Api;
 using XamarinTemplate.Api.Collections.Photos.Factories;
-using XamarinTemplate.Interfaces;
+using XamarinTemplate.Repositories.Photos;
+using XamarinTemplate.Services.HttpMessageHandler;
 using XamarinTemplate.Services.Navigations;
 
 namespace XamarinTemplate.Services.Containers

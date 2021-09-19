@@ -1,4 +1,4 @@
-﻿using XamarinTemplate.Api.Abstracts;
+﻿using XamarinTemplate.Api.Abstractions;
 
 namespace XamarinTemplate.Api.Collections.Photos
 {

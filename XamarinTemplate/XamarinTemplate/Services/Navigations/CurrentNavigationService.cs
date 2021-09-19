@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Basics.Mvvm.Navigations.Services;
 using Xamarin.Basics.Mvvm.Views;
-using Xamarin.Basics.Navigations.Services;
 using Xamarin.Forms;
 
 namespace XamarinTemplate.Services.Navigations
@@ -15,7 +16,7 @@ namespace XamarinTemplate.Services.Navigations
             {
                 ContentPage contentPage => new[] { contentPage as IView },
                 NavigationPage navigationPage => navigationPage.Navigation.NavigationStack?.OfType<IView>().ToArray(),
-                _ => new IView[0]
+                _ => Array.Empty<IView>()
             };
         }
 

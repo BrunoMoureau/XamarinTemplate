@@ -1,6 +1,6 @@
 ﻿using Xamarin.Basics.Mvvm.Views;
 
-namespace Xamarin.Basics.Navigations.Factories
+namespace Xamarin.Basics.Mvvm.Navigations.Factories
 {
     public interface IViewFactory
     {

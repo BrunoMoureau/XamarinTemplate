@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace Xamarin.Basics.CancellationToken
+namespace Xamarin.Basics.Helpers
 {
     public class CancellationTokenHelper
     {
@@ -12,7 +12,7 @@ namespace Xamarin.Basics.CancellationToken
 
         public static void CancelTokenSource(CancellationTokenSource tokenSource)
         {
-            if (tokenSource != null && tokenSource.Token.CanBeCanceled)
+            if (tokenSource is { Token: { CanBeCanceled: true } })
                 tokenSource.Cancel();
         }
     }

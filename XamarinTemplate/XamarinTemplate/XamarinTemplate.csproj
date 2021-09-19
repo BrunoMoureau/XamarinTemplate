@@ -22,16 +22,16 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Views\Main\MainView.xaml.cs">
-        <DependentUpon>MainPage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
       <Compile Update="Views\List\GalleryView.xaml.cs">
         <DependentUpon>ListView.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
       <Compile Update="Views\List\ListView.xaml.cs">
         <DependentUpon>MainView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Features\Gallery\GalleryView.xaml.cs">
+        <DependentUpon>GalleryView.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>

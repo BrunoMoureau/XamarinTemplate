@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using Refit;
-using XamarinTemplate.Api.Abstracts;
 
 namespace XamarinTemplate.Api.Collections.Photos.Factories
 {

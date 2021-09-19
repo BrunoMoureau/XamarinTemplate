@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.Views;
 
-namespace Xamarin.Basics.Navigations.Services
+namespace Xamarin.Basics.Mvvm.Navigations.Services
 {
     public interface ICurrentNavigationService
     {

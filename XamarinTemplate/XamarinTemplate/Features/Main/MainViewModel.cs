@@ -1,24 +1,24 @@
 ﻿using System.Threading.Tasks;
+using Xamarin.Basics.Mvvm.Navigations;
 using Xamarin.Basics.Mvvm.ViewModels;
-using Xamarin.Basics.Navigations;
 using Xamarin.CommunityToolkit.ObjectModel;
-using XamarinTemplate.Views.Gallery;
+using XamarinTemplate.Features.Gallery;
 
-namespace XamarinTemplate.Views.Main
+namespace XamarinTemplate.Features.Main
 {
     public class MainViewModel : ObservableObject, IViewModel
     {
         private readonly INavigationService _navigationService;
-        public AsyncCommand ListCommand { get; }
+        public AsyncCommand GalleryCommand { get; }
 
         public MainViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             
-            ListCommand = new AsyncCommand(OpenListViewAsync);
+            GalleryCommand = new AsyncCommand(OpenGalleryAsync, allowsMultipleExecutions: false);
         }
 
         public Task InitializeAsync(object @params) => Task.CompletedTask;
-        private Task OpenListViewAsync() => _navigationService.PushAsync<GalleryView>();
+        private Task OpenGalleryAsync() => _navigationService.PushAsync<GalleryView>();
     }
 }
