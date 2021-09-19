@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Xamarin.Basics.Mvvm.Contracts.ViewModels;
+﻿using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.Contracts.Views;
 using Xamarin.Basics.Mvvm.Utils;
 using Xamarin.Basics.Navigations.Factories;

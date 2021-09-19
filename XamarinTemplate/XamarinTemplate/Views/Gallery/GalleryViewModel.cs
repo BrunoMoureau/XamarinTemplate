@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Basics.CancellationToken;
 using Xamarin.Basics.Mvvm.Contracts.ViewModels;
 using Xamarin.CommunityToolkit.ObjectModel;
 using XamarinTemplate.Api;
-using XamarinTemplate.Views.List.Models;
+using XamarinTemplate.Views.Gallery.Models;
 
-namespace XamarinTemplate.Views.List
+namespace XamarinTemplate.Views.Gallery
 {
-    public class ListViewModel : ObservableObject, IViewModel
+    public class GalleryViewModel : ObservableObject, IViewModel
     {
         private readonly IPhotoService _photoService;
         private CancellationTokenSource _getPhotosCancellationTokenSource;
@@ -23,7 +22,7 @@ namespace XamarinTemplate.Views.List
             set => SetProperty(ref _photos, value);
         }
 
-        public ListViewModel(IPhotoService photoService)
+        public GalleryViewModel(IPhotoService photoService)
         {
             _photoService = photoService;
         }

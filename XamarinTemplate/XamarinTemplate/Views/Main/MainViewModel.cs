@@ -2,7 +2,7 @@
 using Xamarin.Basics.Mvvm.Contracts.ViewModels;
 using Xamarin.Basics.Navigations;
 using Xamarin.CommunityToolkit.ObjectModel;
-using XamarinTemplate.Views.List;
+using XamarinTemplate.Views.Gallery;
 
 namespace XamarinTemplate.Views.Main
 {
@@ -18,7 +18,7 @@ namespace XamarinTemplate.Views.Main
             ListCommand = new AsyncCommand(OpenListViewAsync);
         }
 
-        private Task OpenListViewAsync() => _navigationService.PushAsync<ListView>();
+        private Task OpenListViewAsync() => _navigationService.PushAsync<GalleryView>();
 
         public Task InitializeAsync(object @params) => Task.CompletedTask;
     }

@@ -1,4 +1,4 @@
-﻿using DryIoc;
+﻿using Autofac;
 using Xamarin.Basics.Mvvm.Contracts.Views;
 using Xamarin.Basics.Navigations.Factories;
 

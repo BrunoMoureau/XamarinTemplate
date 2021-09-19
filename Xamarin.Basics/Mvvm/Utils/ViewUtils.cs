@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Xamarin.Basics.Mvvm.Contracts.Views;
 
 namespace Xamarin.Basics.Mvvm.Utils

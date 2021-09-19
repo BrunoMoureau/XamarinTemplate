@@ -1,19 +1,22 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
-using DryIoc;
-using ImTools;
+using System.Reflection;
+using Autofac;
+using Autofac.Core;
+using Xamarin.Basics.Mvvm.Contracts.ViewModels;
+using Xamarin.Basics.Mvvm.Contracts.Views;
 using Xamarin.Basics.Navigations;
 using Xamarin.Basics.Navigations.Factories;
 using Xamarin.Basics.Navigations.Services;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 using XamarinTemplate.Api;
 using XamarinTemplate.Api.Collections.Photos.Factories;
 using XamarinTemplate.Interfaces;
 using XamarinTemplate.Navigations;
-using XamarinTemplate.Views.List;
 using XamarinTemplate.Views.Main;
-using ListView = XamarinTemplate.Views.List.ListView;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -21,35 +24,71 @@ namespace XamarinTemplate
 {
     public partial class App
     {
-        public static Container Container { get; private set; }
+        public static IContainer Container { get; private set; }
         
         public App()
         {
             InitializeComponent();
 
-            Container = new Container();
-            Container.Register<INavigationService, NavigationService>();
-            Container.Register<ICurrentNavigation, CurrentNavigation>();
-            Container.Register<MainView>();
-            Container.Register<MainViewModel>();
-            Container.Register<ListView>();
-            Container.Register<ListViewModel>();
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
+            containerBuilder.RegisterType<CurrentNavigation>().As<ICurrentNavigation>();
             
-            Container.Register<IViewFactory, ViewFactory>();
-            
-            Container.Register<IPhotoService, PhotoService>();
-            Container.Register<IPhotoApiFactory, PhotoApiFactory>();
+            containerBuilder = RegisterViews(containerBuilder);
+            containerBuilder = RegisterViewModels(containerBuilder);
+
+            containerBuilder.RegisterType<ViewFactory>().As<IViewFactory>();
+            containerBuilder.RegisterType<PhotoService>().As<IPhotoService>();
+            containerBuilder.RegisterType<PhotoApiFactory>().As<IPhotoApiFactory>();
 
             var baseApiUrl = "https://jsonplaceholder.typicode.com/";
-            Container.RegisterDelegate(() => DependencyService.Resolve<IHttpMessageHandlerService>().Create());
+            containerBuilder
+                .Register(c => DependencyService.Resolve<IHttpMessageHandlerService>().Create())
+                .As<Func<HttpMessageHandler>>();
 
-            Container.Register<IPhotoApiFactory, PhotoApiFactory>(Reuse.Singleton);
-            Container.RegisterDelegate(c => c.Resolve<IPhotoApiFactory>().Create(baseApiUrl));
+            containerBuilder.RegisterType<PhotoApiFactory>().As<IPhotoApiFactory>();
+            containerBuilder.Register(c => c.Resolve<IPhotoApiFactory>().Create(baseApiUrl));
+
+            Container = containerBuilder.Build();
             
             var navigationService = Container.Resolve<INavigationService>();
             navigationService.SetStackRootAsync<MainView>();
         }
+        
+        private static ContainerBuilder RegisterViews(ContainerBuilder builder)
+        {
+            var types = Assembly.GetExecutingAssembly().GetTypes();
+            types
+                .Where(IsClassWithViewInterface)
+                .ForEach(v => builder.RegisterType(v));
 
+            return builder;
+        }
+
+        private static ContainerBuilder RegisterViewModels(ContainerBuilder builder)
+        {
+            var types = Assembly.GetExecutingAssembly().GetTypes();
+            types
+                .Where(IsClassWithViewModelInterface)
+                .Where(t => !HasSingleInstanceInterface(t))
+                .ForEach(t => builder.RegisterType(t));
+
+            types
+                .Where(IsClassWithViewModelInterface)
+                .Where(HasSingleInstanceInterface)
+                .ForEach(t => builder.RegisterType(t).SingleInstance());
+
+            return builder;
+        }
+
+        private static bool IsClassWithViewInterface(Type type) =>
+            typeof(IView).IsAssignableFrom(type) && type.IsClass;
+
+        private static bool IsClassWithViewModelInterface(Type type) =>
+            typeof(IViewModel).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract;
+
+        private static bool HasSingleInstanceInterface(Type type) => false;
+        
         protected override void OnStart()
         {
             // Handle when your app starts

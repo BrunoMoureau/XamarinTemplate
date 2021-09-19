@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using XamarinTemplate.Api.Collections.Photos;
-using XamarinTemplate.Views.List.Models;
+using XamarinTemplate.Views.Gallery.Models;
 
 namespace XamarinTemplate.Api
 {

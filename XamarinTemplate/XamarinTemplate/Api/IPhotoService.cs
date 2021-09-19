@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using XamarinTemplate.Views.List.Models;
+using XamarinTemplate.Views.Gallery.Models;
 
 namespace XamarinTemplate.Api
 {
