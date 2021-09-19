@@ -1,6 +1,6 @@
 ﻿namespace XamarinTemplate.Api.Collections.Photos.Dtos
 {
-    public class PhotoDto
+    public record PhotoDto
     {
         public int Id { get; set; }
         public string Title { get; set; }

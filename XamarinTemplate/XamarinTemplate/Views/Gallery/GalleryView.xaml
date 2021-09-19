@@ -10,7 +10,9 @@
     <StackLayout>
         <Label Text="List" />
         
-        <CollectionView ItemsSource="{Binding Photos}">
+        <CollectionView ItemsSource="{Binding Photos}"
+                        ItemSizingStrategy="MeasureFirstItem">
+            
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="10"
                                    Orientation="Vertical"/>
@@ -20,9 +22,9 @@
                 <DataTemplate x:DataType="{x:Type models:Photo}">
                     <StackLayout Orientation="Horizontal">
                         <Image Source="{Binding ThumbnailUrl}"
+                               Aspect="AspectFit"
                                HeightRequest="50"
-                               WidthRequest="50"
-                               BackgroundColor="Yellow"/>
+                               WidthRequest="50"/>
                         
                         <Label Text="{Binding Title}" />
                     </StackLayout>

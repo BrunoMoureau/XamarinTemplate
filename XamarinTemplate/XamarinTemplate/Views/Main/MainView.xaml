@@ -7,11 +7,7 @@
              x:DataType="{x:Type viewModels:MainViewModel}">
 
     <StackLayout>
-        <Label Text="Welcome to Xamarin.Forms!"
-               HorizontalOptions="Center"
-               VerticalOptions="CenterAndExpand" />
-
-        <Button Text="Go to ListView"
+        <Button Text="Show Gallery"
                 Command="{Binding ListCommand}" />
     </StackLayout>
 </ContentPage>

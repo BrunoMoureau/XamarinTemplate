@@ -12,6 +12,8 @@ namespace XamarinTemplate.Droid
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            Android.Glide.Forms.Init(this);
             LoadApplication(new App());
         }
     }
