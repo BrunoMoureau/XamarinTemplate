@@ -35,4 +35,13 @@
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="appsettings.json" Condition="!Exists('appsettings.json')" />
+        <EmbeddedResource Include="appsettings.$(Configuration).json" Link="appsettings.json" Condition="Exists('appsettings.$(Configuration).json')" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="local.appsettings.json" />
+    </ItemGroup>
 </Project>
