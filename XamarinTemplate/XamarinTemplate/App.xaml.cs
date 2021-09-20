@@ -14,7 +14,7 @@ namespace XamarinTemplate
             InitializeComponent();
 
             ContainerService.Initialize();
-
+            
             var navigationService = ContainerService.Resolve<INavigationService>();
             navigationService.SetStackRootAsync<MainView>();
         }
