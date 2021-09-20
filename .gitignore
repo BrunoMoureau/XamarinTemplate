@@ -288,4 +288,4 @@ __pycache__/
 *.xsd.cs
 
 # Custom
-**/local.appsettings.json
+**/appsettings.local.json
