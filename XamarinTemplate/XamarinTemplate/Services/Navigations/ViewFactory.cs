@@ -6,6 +6,13 @@ namespace XamarinTemplate.Services.Navigations
 {
     public class ViewFactory : IViewFactory
     {
-        public TView Create<TView>() where TView : IView => ContainerService.Resolve<TView>();
+        private readonly IMyContainer _myContainer;
+
+        public ViewFactory(IMyContainer myContainer)
+        {
+            _myContainer = myContainer;
+        }
+        
+        public TView Create<TView>() where TView : IView => _myContainer.Resolve<TView>();
     }
 }

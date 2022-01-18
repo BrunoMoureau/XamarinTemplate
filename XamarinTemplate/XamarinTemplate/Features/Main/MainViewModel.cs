@@ -3,18 +3,21 @@ using Xamarin.Basics.Mvvm.Navigations;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.CommunityToolkit.ObjectModel;
 using XamarinTemplate.Features.Gallery;
+using XamarinTemplate.Settings;
 
 namespace XamarinTemplate.Features.Main
 {
     public class MainViewModel : ObservableObject, IViewModel
     {
         private readonly INavigationService _navigationService;
+        private readonly EnvironmentSettings _settings;
         public AsyncCommand GalleryCommand { get; }
 
-        public MainViewModel(INavigationService navigationService)
+        public MainViewModel(INavigationService navigationService, EnvironmentSettings settings)
         {
             _navigationService = navigationService;
-            
+            _settings = settings;
+
             GalleryCommand = new AsyncCommand(OpenGalleryAsync, allowsMultipleExecutions: false);
         }
 

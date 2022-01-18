@@ -6,44 +6,95 @@ using Xamarin.Basics.Mvvm.Navigations.Factories;
 using Xamarin.Basics.Mvvm.Navigations.Services;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.Basics.Mvvm.Views;
+using Xamarin.Basics.Settings;
 using Xamarin.Forms;
-using XamarinTemplate.Api;
 using XamarinTemplate.Api.Collections.Photos.Factories;
 using XamarinTemplate.Repositories.Photos;
 using XamarinTemplate.Services.HttpMessageHandler;
 using XamarinTemplate.Services.Navigations;
+using XamarinTemplate.Settings;
 
 namespace XamarinTemplate.Services.Containers
 {
-    public static class ContainerService
+    public class MyContainer : IMyContainer
     {
-        private static Container _container;
-        
-        public static void Initialize()
+        private readonly Container _container;
+
+        public MyContainer(Container container)
         {
-            _container = new Container();
-            
-            _container.Register<INavigationService, NavigationService>();
-            _container.Register<ICurrentNavigationService, CurrentNavigationService>();
-            
-            _container.RegisterMany(new[] { Assembly.GetExecutingAssembly() }, IsClassWithViewInterface);
-            _container.RegisterMany(new[] { Assembly.GetExecutingAssembly() }, IsClassWithViewModelInterface);
+            _container = container;
+        }
+        
+        public TResult Resolve<TResult>() => _container.Resolve<TResult>();
+    }
 
-            _container.Register<IViewFactory, ViewFactory>();
-            _container.Register<IPhotoService, PhotoService>();
+    public interface IMyContainer
+    {
+        TResult Resolve<TResult>();
+    }
 
-            var baseApiUrl = "https://jsonplaceholder.typicode.com/";
-            _container.Register<ApiFactory>(Reuse.Singleton);
-            _container.RegisterDelegate(() => DependencyService.Resolve<IHttpMessageHandlerService>().Create());
-            _container.RegisterDelegate(c => c.Resolve<ApiFactory>().CreatePhotoApi(baseApiUrl));
+    public class ContainerService
+    {
+        public IMyContainer Initialize()
+        {
+            var container = new Container();
+
+            container = RegisterMvvm(container);
+            container = RegisterSettings(container);
+            container = RegisterServices(container);
+            container = RegisterApi(container);
+
+            var myContainer = new MyContainer(container);
+            container.RegisterInstance<IMyContainer>(myContainer);
+
+            return myContainer;
         }
 
-        public static TResult Resolve<TResult>() => _container.Resolve<TResult>();
-        
+        private Container RegisterMvvm(Container container)
+        {
+            container.RegisterMany(new[] { Assembly.GetExecutingAssembly() }, IsClassWithViewInterface);
+            container.RegisterMany(new[] { Assembly.GetExecutingAssembly() }, IsClassWithViewModelInterface);
+
+            container.Register<IViewFactory, ViewFactory>();
+
+            return container;
+        }
+
+        private Container RegisterSettings(Container container)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var appSettings = new AppSettings(assembly);
+            
+            container.RegisterInstance(appSettings.Get<EnvironmentSettings>("Environment"));
+
+            return container;
+        }
+
+        private Container RegisterServices(Container container)
+        {
+            container.Register<INavigationService, NavigationService>();
+            container.Register<ICurrentNavigationService, CurrentNavigationService>();
+
+            container.Register<IPhotoService, PhotoService>();
+
+            return container;
+        }
+
+        private Container RegisterApi(Container container)
+        {
+            var baseApiUrl = "https://jsonplaceholder.typicode.com/";
+            container.Register<ApiFactory>(Reuse.Singleton);
+            container.RegisterDelegate(() => DependencyService.Resolve<IHttpMessageHandlerService>().Create());
+            container.RegisterDelegate(c => c.Resolve<ApiFactory>().CreatePhotoApi(baseApiUrl));
+
+            return container;
+        }
+
         private static bool IsClassWithViewInterface(Type type) =>
             typeof(IView).IsAssignableFrom(type) && type.IsClass;
 
         private static bool IsClassWithViewModelInterface(Type type) =>
-            (typeof(IViewModel).IsAssignableFrom(type) || typeof(IViewModel<>).IsAssignableFrom(type)) && type.IsClass && !type.IsAbstract;
+            (typeof(IViewModel).IsAssignableFrom(type) || typeof(IViewModel<>).IsAssignableFrom(type)) &&
+            type.IsClass && !type.IsAbstract;
     }
 }
