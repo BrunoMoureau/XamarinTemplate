@@ -1,4 +1,5 @@
-﻿using Xamarin.Basics.Mvvm.Navigations;
+﻿using DryIoc;
+using Xamarin.Basics.Mvvm.Navigations;
 using Xamarin.Forms.Xaml;
 using XamarinTemplate.Features.Main;
 using XamarinTemplate.Services.Containers;
@@ -13,10 +14,10 @@ namespace XamarinTemplate
         {
             InitializeComponent();
 
-            var containerService = new ContainerService();
-            var myContainer = containerService.Initialize();
+            var appContainer = new AppContainer();
+            appContainer.Initialize();
             
-            var navigationService = myContainer.Resolve<INavigationService>();
+            var navigationService = appContainer.Resolve<INavigationService>();
             navigationService.SetStackRootAsync<MainView>();
         }
     }

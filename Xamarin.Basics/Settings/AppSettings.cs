@@ -32,6 +32,7 @@ namespace Xamarin.Basics.Settings
         {
             using var file = assembly.GetManifestResourceStream(resourceName);
             if(file == null) return new JsonElement();
+            
             using var document = JsonDocument.Parse(file);
             return document.RootElement.Clone();
         }
