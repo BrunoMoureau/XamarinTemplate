@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using Xamarin.Basics.Helpers;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.CommunityToolkit.ObjectModel;
-using XamarinTemplate.Features.Gallery.Models;
+using XamarinTemplate.Abstractions.Repositories.Photos;
+using XamarinTemplate.Abstractions.Repositories.Photos.Models;
 using XamarinTemplate.Repositories.Photos;
 
 namespace XamarinTemplate.Features.Gallery

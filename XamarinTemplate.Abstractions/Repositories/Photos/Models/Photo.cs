@@ -1,4 +1,4 @@
-﻿namespace XamarinTemplate.Features.Gallery.Models
+﻿namespace XamarinTemplate.Abstractions.Repositories.Photos.Models
 {
     public class Photo
     {

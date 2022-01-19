@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using XamarinTemplate.Abstractions.Repositories.Photos;
+using XamarinTemplate.Abstractions.Repositories.Photos.Models;
 using XamarinTemplate.Api.Collections.Photos;
-using XamarinTemplate.Features.Gallery.Models;
 
 namespace XamarinTemplate.Repositories.Photos
 {

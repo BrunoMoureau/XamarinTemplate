@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Xamarin.Basics\Xamarin.Basics.csproj" />
+      <ProjectReference Include="..\..\XamarinTemplate.Abstractions\XamarinTemplate.Abstractions.csproj" />
       <ProjectReference Include="..\..\XamarinTemplate.Api\XamarinTemplate.Api.csproj" />
     </ItemGroup>
 
