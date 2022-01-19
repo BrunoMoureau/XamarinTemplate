@@ -2,7 +2,7 @@
 using System.Net.Http;
 using Xamarin.Forms;
 using XamarinTemplate.iOS.Dependencies;
-using XamarinTemplate.Services.HttpMessageHandler;
+using XamarinTemplate.Services.HttpMessageHandlers;
 
 [assembly: Dependency(typeof(HttpMessageHandlerService))]
 namespace XamarinTemplate.iOS.Dependencies

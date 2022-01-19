@@ -10,7 +10,7 @@ using Xamarin.Basics.Settings;
 using Xamarin.Forms;
 using XamarinTemplate.Api.Collections.Photos.Factories;
 using XamarinTemplate.Repositories.Photos;
-using XamarinTemplate.Services.HttpMessageHandler;
+using XamarinTemplate.Services.HttpMessageHandlers;
 using XamarinTemplate.Services.Navigations;
 using XamarinTemplate.Settings;
 
