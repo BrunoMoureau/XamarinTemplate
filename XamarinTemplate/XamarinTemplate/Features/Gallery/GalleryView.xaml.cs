@@ -1,4 +1,7 @@
-﻿using Xamarin.Basics.Mvvm.Views;
+﻿using System;
+using Xamarin.Basics.Mvvm.Navigations;
+using Xamarin.Basics.Mvvm.Views;
+using Xamarin.Forms;
 
 namespace XamarinTemplate.Features.Gallery
 {

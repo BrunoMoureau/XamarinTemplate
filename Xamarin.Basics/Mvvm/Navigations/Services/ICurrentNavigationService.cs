@@ -1,10 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.Views;
 
 namespace Xamarin.Basics.Mvvm.Navigations.Services
 {
     public interface ICurrentNavigationService
-    {
+    {       
+        public event EventHandler<IView> ViewPushed;
+        public event EventHandler<IView> ViewPopped;
+        
         IView[] GetViews();
         void SetRootView<TView>(TView view) where TView : IRootView;
         void SetStackView<TView>(TView view) where TView : IStackView;

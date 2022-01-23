@@ -8,7 +8,7 @@ using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.Basics.Mvvm.Views;
 using Xamarin.Basics.Settings;
 using Xamarin.Forms;
-using XamarinTemplate.Abstractions.Repositories.Photos;
+using XamarinTemplate.Abstractions.Photos;
 using XamarinTemplate.Api.Collections.Photos.Factories;
 using XamarinTemplate.Repositories.Photos;
 using XamarinTemplate.Services.HttpMessageHandlers;

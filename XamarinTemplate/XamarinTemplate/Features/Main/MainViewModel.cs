@@ -10,13 +10,11 @@ namespace XamarinTemplate.Features.Main
     public class MainViewModel : ObservableObject, IViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly EnvironmentSettings _settings;
         public AsyncCommand GalleryCommand { get; }
 
-        public MainViewModel(INavigationService navigationService, EnvironmentSettings settings)
+        public MainViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            _settings = settings;
 
             GalleryCommand = new AsyncCommand(OpenGalleryAsync, allowsMultipleExecutions: false);
         }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using XamarinTemplate.Abstractions.Repositories.Photos;
-using XamarinTemplate.Abstractions.Repositories.Photos.Models;
+using XamarinTemplate.Abstractions.Photos;
+using XamarinTemplate.Abstractions.Photos.Models;
 using XamarinTemplate.Api.Collections.Photos;
 
 namespace XamarinTemplate.Repositories.Photos
@@ -17,10 +17,11 @@ namespace XamarinTemplate.Repositories.Photos
         {
             _photoApi = photoApi;
         }
-        
+
         public async Task<List<Photo>> GetPhotosAsync(CancellationToken cancellationToken)
         {
             var photos = await _photoApi.GetPhotosAsync(cancellationToken).ConfigureAwait(false);
+
             return photos.Select(p => new Photo
             {
                 Id = p.Id,

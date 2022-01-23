@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:gallery="clr-namespace:XamarinTemplate.Features.Gallery;assembly=XamarinTemplate"
-             xmlns:models="clr-namespace:XamarinTemplate.Abstractions.Repositories.Photos.Models;assembly=XamarinTemplate.Abstractions"
+             xmlns:models="clr-namespace:XamarinTemplate.Abstractions.Photos.Models;assembly=XamarinTemplate.Abstractions"
              x:Class="XamarinTemplate.Features.Gallery.GalleryView"
              x:DataType="{x:Type gallery:GalleryViewModel}">
 

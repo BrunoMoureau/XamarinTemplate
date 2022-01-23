@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using XamarinTemplate.Abstractions.Repositories.Photos.Models;
+using XamarinTemplate.Abstractions.Photos.Models;
 
-namespace XamarinTemplate.Abstractions.Repositories.Photos
+namespace XamarinTemplate.Abstractions.Photos
 {
     public interface IPhotoService
     {
