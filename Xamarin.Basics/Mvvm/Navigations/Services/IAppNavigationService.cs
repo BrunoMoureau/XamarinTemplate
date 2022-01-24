@@ -4,7 +4,7 @@ using Xamarin.Basics.Mvvm.Views;
 
 namespace Xamarin.Basics.Mvvm.Navigations.Services
 {
-    public interface ICurrentNavigationService
+    public interface IAppNavigationService
     {       
         public event EventHandler<IView> ViewAdded;
         public event EventHandler<IView> ViewRemoved;

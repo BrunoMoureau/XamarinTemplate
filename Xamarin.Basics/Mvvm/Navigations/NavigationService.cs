@@ -9,14 +9,14 @@ namespace Xamarin.Basics.Mvvm.Navigations
 {
     public class NavigationService : INavigationService
     {
-        private readonly ICurrentNavigationService _currentNavigationService;
+        private readonly IAppNavigationService _appNavigationService;
         private readonly IViewFactory _viewFactory;
 
-        public NavigationService(ICurrentNavigationService currentNavigationService, IViewFactory viewFactory)
+        public NavigationService(IAppNavigationService appNavigationService, IViewFactory viewFactory)
         {
-            _currentNavigationService = currentNavigationService;
-            _currentNavigationService.ViewAdded += OnViewAdded;
-            _currentNavigationService.ViewRemoved += OnViewRemoved;
+            _appNavigationService = appNavigationService;
+            _appNavigationService.ViewAdded += OnViewAdded;
+            _appNavigationService.ViewRemoved += OnViewRemoved;
             
             _viewFactory = viewFactory;
         }
@@ -27,7 +27,7 @@ namespace Xamarin.Basics.Mvvm.Navigations
         public Task SetRootAsync<TView, TParams>(TParams parameters) where TView : IRootView
         {
             var view = _viewFactory.Create<TView>();
-            _currentNavigationService.SetRootView(view);
+            _appNavigationService.SetRootView(view);
 
             return ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
         }
@@ -38,7 +38,7 @@ namespace Xamarin.Basics.Mvvm.Navigations
         public Task SetStackRootAsync<TView, TParams>(TParams parameters) where TView : IStackView
         {
             var view = _viewFactory.Create<TView>();
-            _currentNavigationService.SetStackView(view);
+            _appNavigationService.SetStackView(view);
 
             return ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
         }
@@ -50,7 +50,7 @@ namespace Xamarin.Basics.Mvvm.Navigations
             where TView : IStackView
         {
             var view = _viewFactory.Create<TView>();
-            await _currentNavigationService.PushViewAsync(view, animated);
+            await _appNavigationService.PushViewAsync(view, animated);
             
             await ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
         }
@@ -62,15 +62,15 @@ namespace Xamarin.Basics.Mvvm.Navigations
             where TView : IModalView
         {
             var modalView = _viewFactory.Create<TView>();
-            await _currentNavigationService.PushModalViewAsync(modalView, animated);
+            await _appNavigationService.PushModalViewAsync(modalView, animated);
 
             await ViewModelUtils.InitializeAsync(modalView?.ViewModel, parameters);
         }
 
-        public Task PopAsync(bool animated = true) => _currentNavigationService.PopViewAsync(animated);
-        public Task PopModalAsync(bool animated = true) => _currentNavigationService.PopModalViewAsync(animated);
+        public Task PopAsync(bool animated = true) => _appNavigationService.PopViewAsync(animated);
+        public Task PopModalAsync(bool animated = true) => _appNavigationService.PopModalViewAsync(animated);
 
-        public bool AnyModalDisplayed() => _currentNavigationService.HasModalView();
+        public bool AnyModalDisplayed() => _appNavigationService.HasModalView();
         
         private void OnViewAdded(object sender, IView view)
         {

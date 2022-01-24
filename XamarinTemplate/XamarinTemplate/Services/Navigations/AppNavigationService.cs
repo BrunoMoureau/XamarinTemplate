@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace XamarinTemplate.Services.Navigations
 {
-    public class CurrentNavigationService : ICurrentNavigationService
+    public class AppNavigationService : IAppNavigationService
     {
         public event EventHandler<IView> ViewAdded;
         public event EventHandler<IView> ViewRemoved;

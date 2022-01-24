@@ -50,7 +50,7 @@ namespace XamarinTemplate.Services.Containers
             #region Services
             
             _container.Register<INavigationService, NavigationService>();
-            _container.Register<ICurrentNavigationService, CurrentNavigationService>();
+            _container.Register<IAppNavigationService, AppNavigationService>();
 
             _container.Register<IPhotoService, PhotoService>();
             
