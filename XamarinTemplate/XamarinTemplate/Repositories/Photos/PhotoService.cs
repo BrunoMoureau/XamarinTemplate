@@ -21,7 +21,8 @@ namespace XamarinTemplate.Repositories.Photos
         public async Task<List<Photo>> GetPhotosAsync(CancellationToken cancellationToken)
         {
             var photos = await _photoApi.GetPhotosAsync(cancellationToken).ConfigureAwait(false);
-
+            cancellationToken.ThrowIfCancellationRequested();
+            
             return photos.Select(p => new Photo
             {
                 Id = p.Id,
