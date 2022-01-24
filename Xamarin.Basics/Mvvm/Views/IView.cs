@@ -6,13 +6,8 @@ namespace Xamarin.Basics.Mvvm.Views
     {
         object BindingContext { get; }
         IViewModel<object> ViewModel => BindingContext as IViewModel<object>;
-        
-        public void Load()
-        {
-        }
 
-        public void Unload()
-        {
-        }
+        public void Load();
+        public void Unload();
     }
 }

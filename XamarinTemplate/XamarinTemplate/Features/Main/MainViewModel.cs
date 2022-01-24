@@ -3,7 +3,6 @@ using Xamarin.Basics.Mvvm.Navigations;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.CommunityToolkit.ObjectModel;
 using XamarinTemplate.Features.Gallery;
-using XamarinTemplate.Settings;
 
 namespace XamarinTemplate.Features.Main
 {
@@ -19,7 +18,16 @@ namespace XamarinTemplate.Features.Main
             GalleryCommand = new AsyncCommand(OpenGalleryAsync, allowsMultipleExecutions: false);
         }
 
+        public void Load()
+        {
+        }
+
         public Task InitializeAsync(object @params) => Task.CompletedTask;
+
+        public void Unload()
+        {
+        }
+
         private Task OpenGalleryAsync() => _navigationService.PushAsync<GalleryView>();
     }
 }

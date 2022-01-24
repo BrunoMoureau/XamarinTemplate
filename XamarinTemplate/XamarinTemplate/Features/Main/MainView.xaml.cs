@@ -11,5 +11,13 @@ namespace XamarinTemplate.Features.Main
             InitializeComponent();
             BindingContext = viewModel;
         }
+
+        public void Load()
+        {
+        }
+
+        public void Unload()
+        {
+        }
     }
 }

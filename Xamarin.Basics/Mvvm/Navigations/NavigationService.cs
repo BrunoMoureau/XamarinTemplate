@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.Navigations.Factories;
 using Xamarin.Basics.Mvvm.Navigations.Services;
 using Xamarin.Basics.Mvvm.ViewModels.Utils;
@@ -16,8 +15,8 @@ namespace Xamarin.Basics.Mvvm.Navigations
         public NavigationService(ICurrentNavigationService currentNavigationService, IViewFactory viewFactory)
         {
             _currentNavigationService = currentNavigationService;
-            _currentNavigationService.ViewPushed += OnViewPushed;
-            _currentNavigationService.ViewPopped += OnViewPopped;
+            _currentNavigationService.ViewAdded += OnViewAdded;
+            _currentNavigationService.ViewRemoved += OnViewRemoved;
             
             _viewFactory = viewFactory;
         }
@@ -27,13 +26,8 @@ namespace Xamarin.Basics.Mvvm.Navigations
 
         public Task SetRootAsync<TView, TParams>(TParams parameters) where TView : IRootView
         {
-            var currentViews = _currentNavigationService.GetViews();
             var view = _viewFactory.Create<TView>();
-            
             _currentNavigationService.SetRootView(view);
-
-            ViewUtils.Unload(currentViews);
-            ViewUtils.Load(view);
 
             return ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
         }
@@ -43,13 +37,8 @@ namespace Xamarin.Basics.Mvvm.Navigations
 
         public Task SetStackRootAsync<TView, TParams>(TParams parameters) where TView : IStackView
         {
-            var currentViews = _currentNavigationService.GetViews();
             var view = _viewFactory.Create<TView>();
-
             _currentNavigationService.SetStackView(view);
-
-            ViewUtils.Unload(currentViews);
-            ViewUtils.Load(view);
 
             return ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
         }
@@ -80,16 +69,15 @@ namespace Xamarin.Basics.Mvvm.Navigations
 
         public Task PopAsync(bool animated = true) => _currentNavigationService.PopViewAsync(animated);
         public Task PopModalAsync(bool animated = true) => _currentNavigationService.PopModalViewAsync(animated);
-        public Task PopToRootAsync(bool animated = true) => _currentNavigationService.PopAllAsync(animated);
 
         public bool AnyModalDisplayed() => _currentNavigationService.HasModalView();
         
-        private void OnViewPushed(object sender, IView view)
+        private void OnViewAdded(object sender, IView view)
         {
             ViewUtils.Load(view);
         }
 
-        private void OnViewPopped(object sender, IView view)
+        private void OnViewRemoved(object sender, IView view)
         {
             ViewUtils.Unload(view);
         }

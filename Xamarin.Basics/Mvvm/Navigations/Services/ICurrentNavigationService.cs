@@ -6,13 +6,13 @@ namespace Xamarin.Basics.Mvvm.Navigations.Services
 {
     public interface ICurrentNavigationService
     {       
-        public event EventHandler<IView> ViewPushed;
-        public event EventHandler<IView> ViewPopped;
+        public event EventHandler<IView> ViewAdded;
+        public event EventHandler<IView> ViewRemoved;
         
         IView[] GetViews();
         void SetRootView<TView>(TView view) where TView : IRootView;
         void SetStackView<TView>(TView view) where TView : IStackView;
-
+        
         public bool HasRootStackView();
         public IView GetLastViewOrDefault();
         public IView GetLastModalViewOrDefault();
@@ -20,7 +20,6 @@ namespace Xamarin.Basics.Mvvm.Navigations.Services
         Task PushModalViewAsync<TView>(TView view, bool animated = true) where TView : IModalView;
         Task PopViewAsync(bool animated);
         Task PopModalViewAsync(bool animated);
-        Task PopAllAsync(bool animated);
         bool HasModalView();
     }
 }

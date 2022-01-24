@@ -1,7 +1,4 @@
-﻿using System;
-using Xamarin.Basics.Mvvm.Navigations;
-using Xamarin.Basics.Mvvm.Views;
-using Xamarin.Forms;
+﻿using Xamarin.Basics.Mvvm.Views;
 
 namespace XamarinTemplate.Features.Gallery
 {
@@ -13,6 +10,14 @@ namespace XamarinTemplate.Features.Gallery
         {
             InitializeComponent();
             BindingContext = viewModel;
+        }
+        
+        public void Load()
+        {
+        }
+
+        public void Unload()
+        {
         }
     }
 }

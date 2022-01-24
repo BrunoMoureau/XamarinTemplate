@@ -1,5 +1,4 @@
-﻿using DryIoc;
-using Xamarin.Basics.Mvvm.Navigations;
+﻿using Xamarin.Basics.Mvvm.Navigations;
 using Xamarin.Forms.Xaml;
 using XamarinTemplate.Features.Main;
 using XamarinTemplate.Services.Containers;

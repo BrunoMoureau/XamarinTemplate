@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Xamarin.Basics.Helpers;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.CommunityToolkit.ObjectModel;
-using Xamarin.Forms;
 using XamarinTemplate.Abstractions.Photos;
 using XamarinTemplate.Abstractions.Photos.Models;
 
@@ -44,7 +43,11 @@ namespace XamarinTemplate.Features.Gallery
         {
             _photoService = photoService;
         }
-
+        
+        public void Load()
+        {
+        }
+        
         public async Task InitializeAsync(object @params)
         {
             try
@@ -57,11 +60,7 @@ namespace XamarinTemplate.Features.Gallery
                 //todo set this in service (callAsync takes ICancelHandler as FireAndForget one)
             }
         }
-
-        public void Load()
-        {
-        }
-
+        
         public void Unload()
         {
             _service.Cancel();
