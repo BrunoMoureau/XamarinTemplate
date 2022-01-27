@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.Navigations;
 using Xamarin.Basics.Mvvm.ViewModels;
-using Xamarin.Basics.Services.Messagings;
 using Xamarin.CommunityToolkit.ObjectModel;
 using XamarinTemplate.Features.Gallery;
 
 namespace XamarinTemplate.Features.Main
 {
-    public class MainViewModel : ObservableObject, IViewModel, IMessageSender
+    public class MainViewModel : ObservableObject, IViewModel
     {
         private readonly INavigationService _navigationService;
         public AsyncCommand GalleryCommand { get; }

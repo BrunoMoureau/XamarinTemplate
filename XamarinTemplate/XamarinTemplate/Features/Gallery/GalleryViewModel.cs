@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.Basics.Services;
+using Xamarin.Basics.Services.Messagings;
 using Xamarin.CommunityToolkit.ObjectModel;
 using XamarinTemplate.Abstractions.Photos;
 using XamarinTemplate.Abstractions.Photos.Models;
 
 namespace XamarinTemplate.Features.Gallery
 {
+    public class PhotoMessage : IMessage
+    {
+    }
+    
     public class GalleryViewModel : ObservableObject, IViewModel
     {
         private readonly IPhotoService _photoService;
-        private readonly BackgroundService _backgroundService = new();
+        private readonly BackgroundService _getPhotos = new();
 
         private List<Photo> _photos;
 
@@ -35,8 +40,7 @@ namespace XamarinTemplate.Features.Gallery
         {
             try
             {
-                var photos = await _backgroundService.CallAsync(c => _photoService.GetPhotosAsync(c));
-                Photos = photos;
+                Photos = await _getPhotos.RunAsync(c => _photoService.GetPhotosAsync(c));
             }
             catch (OperationCanceledException)
             {
@@ -45,7 +49,7 @@ namespace XamarinTemplate.Features.Gallery
         
         public void Unload()
         {
-            _backgroundService.Cancel();
+            _getPhotos.Cancel();
         }
     }
 }

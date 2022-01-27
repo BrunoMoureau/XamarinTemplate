@@ -13,7 +13,7 @@ namespace XamarinTemplate.Services.Messagings
         }
 
         public void Subscribe<TSender, TMessage>(IMessageSubscriber<TSender, TMessage> subscriber)
-            where TSender : class, IMessageSender
+            where TSender : class
             where TMessage : IMessage
         {
             MessagingCenter.Subscribe<TSender, TMessage>(subscriber, typeof(TMessage).FullName,
@@ -27,7 +27,7 @@ namespace XamarinTemplate.Services.Messagings
         }
 
         public void Unsubscribe<TSender, TMessage>(IMessageSubscriber<TSender, TMessage> subscriber)
-            where TSender : class, IMessageSender
+            where TSender : class
             where TMessage : IMessage
         {
             MessagingCenter.Unsubscribe<TSender, TMessage>(subscriber, typeof(TMessage).FullName);
@@ -40,7 +40,7 @@ namespace XamarinTemplate.Services.Messagings
         }
 
         public void Send<TSender, TMessage>(TSender sender, TMessage message)
-            where TSender : class, IMessageSender
+            where TSender : class
             where TMessage : IMessage
         {
             MessagingCenter.Send(sender, typeof(TMessage).FullName, message);

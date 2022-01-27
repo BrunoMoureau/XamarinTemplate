@@ -9,7 +9,7 @@ namespace Xamarin.Basics.Services
     {
         private CancellationTokenSource _cancellationTokenSource;
 
-        public Task<TResult> CallAsync<TResult>(Func<CancellationToken, Task<TResult>> func)
+        public Task<TResult> RunAsync<TResult>(Func<CancellationToken, Task<TResult>> func)
         {
             CancellationTokenHelper.GenerateTokenSource(ref _cancellationTokenSource);
             return Task.Run(() => func(_cancellationTokenSource.Token), _cancellationTokenSource.Token);
