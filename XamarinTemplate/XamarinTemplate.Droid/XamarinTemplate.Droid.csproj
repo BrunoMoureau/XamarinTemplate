@@ -61,12 +61,12 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="glidex.forms" Version="2.1.0.470" />
+        <PackageReference Include="glidex.forms" Version="2.1.1.648" />
         <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.2.4.1" />
         <PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.8" />
         <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.1" />
-        <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
-        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
+        <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Dependencies\HttpMessageHandlerService.cs" />
