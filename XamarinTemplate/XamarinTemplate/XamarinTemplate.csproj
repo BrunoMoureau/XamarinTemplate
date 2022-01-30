@@ -35,6 +35,14 @@
         <DependentUpon>GalleryView.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Features\Messaging\MessagingView.xaml.cs">
+        <DependentUpon>MessagingView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Features\Messaging\MessagingView.xaml.cs">
+        <DependentUpon>MainView.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

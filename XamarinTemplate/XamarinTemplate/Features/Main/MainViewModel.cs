@@ -3,6 +3,7 @@ using Xamarin.Basics.Mvvm.Navigations;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.CommunityToolkit.ObjectModel;
 using XamarinTemplate.Features.Gallery;
+using XamarinTemplate.Features.Messaging;
 
 namespace XamarinTemplate.Features.Main
 {
@@ -10,11 +11,13 @@ namespace XamarinTemplate.Features.Main
     {
         private readonly INavigationService _navigationService;
         public AsyncCommand GalleryCommand { get; }
+        public AsyncCommand MessagingCommand { get; }
 
         public MainViewModel(INavigationService navigationService) 
         {
             _navigationService = navigationService;
             GalleryCommand = new AsyncCommand(OpenGalleryAsync, allowsMultipleExecutions: false);
+            MessagingCommand = new AsyncCommand(OpenMessagingAsync, allowsMultipleExecutions: false);
         }
 
         public void Load()
@@ -28,5 +31,6 @@ namespace XamarinTemplate.Features.Main
         }
 
         private Task OpenGalleryAsync() => _navigationService.PushAsync<GalleryView>();
+        private Task OpenMessagingAsync() => _navigationService.PushAsync<MessagingView>();
     }
 }

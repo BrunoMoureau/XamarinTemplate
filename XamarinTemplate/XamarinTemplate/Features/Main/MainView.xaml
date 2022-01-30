@@ -9,5 +9,10 @@
     <StackLayout>
         <Button Text="Show Gallery"
                 Command="{Binding GalleryCommand}" />
+        
+        <Label Text="Examples"/>
+        
+        <Button Text="Show Messaging"
+                Command="{Binding MessagingCommand}" />
     </StackLayout>
 </ContentPage>
