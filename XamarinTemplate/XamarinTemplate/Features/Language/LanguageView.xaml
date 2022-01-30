@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:language="clr-namespace:XamarinTemplate.Features.Language;assembly=XamarinTemplate"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="XamarinTemplate.Features.Language.LanguageView"
+             x:DataType="{x:Type language:LanguageViewModel}">
+
+    <StackLayout>
+        <Button Text="{xct:Translate Lang_EN}"
+                Command="{Binding SetCultureCommand}"
+                CommandParameter="EN"/>
+        
+        <Button Text="{xct:Translate Lang_FR}"
+                Command="{Binding SetCultureCommand}"
+                CommandParameter="FR" />
+    </StackLayout>
+</ContentPage>

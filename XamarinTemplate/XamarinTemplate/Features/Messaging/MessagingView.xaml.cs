@@ -22,12 +22,12 @@ namespace XamarinTemplate.Features.Messaging
 
         public void Load()
         {
-            _messageService.Subscribe<HelloMessage>(this);
+            _messageService.Subscribe(this);
         }
 
         public void Unload()
         {
-            _messageService.Unsubscribe<HelloMessage>(this);
+            _messageService.Unsubscribe(this);
         }
 
         public void OnMessageReceived(object sender, HelloMessage message)

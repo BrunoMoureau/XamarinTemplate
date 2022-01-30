@@ -7,7 +7,7 @@
              x:DataType="{x:Type messaging:MessagingViewModel}">
 
     <StackLayout>
-        <Button Text="Send Message"
+        <Button Text="Send Message (Viewmodel -> View)"
                 Command="{Binding SendMessageCommand}" />
     </StackLayout>
 </ContentPage>

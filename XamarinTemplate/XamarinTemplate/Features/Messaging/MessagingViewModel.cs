@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.Basics.Services.Messagings;
 using Xamarin.CommunityToolkit.ObjectModel;
@@ -10,7 +11,7 @@ namespace XamarinTemplate.Features.Messaging
     public class MessagingViewModel : ObservableObject, IViewModel
     {
         private readonly IMessageService _messageService;
-        public Command SendMessageCommand { get; }
+        public ICommand SendMessageCommand { get; }
 
         public MessagingViewModel(IMessageService messageService) 
         {

@@ -2,17 +2,19 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:XamarinTemplate.Features.Main;assembly=XamarinTemplate"
+             xmlns:main="clr-namespace:XamarinTemplate.Features.Main;assembly=XamarinTemplate"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="XamarinTemplate.Features.Main.MainView"
-             x:DataType="{x:Type viewModels:MainViewModel}">
+             x:DataType="{x:Type main:MainViewModel}">
 
     <StackLayout>
-        <Button Text="Show Gallery"
+        <Button Text="{xct:Translate Action_Show_Gallery}"
                 Command="{Binding GalleryCommand}" />
         
-        <Label Text="Examples"/>
-        
-        <Button Text="Show Messaging"
+        <Button Text="{xct:Translate Action_Show_Messaging}"
                 Command="{Binding MessagingCommand}" />
+        
+        <Button Text="{xct:Translate Action_Show_Language}"
+                Command="{Binding LanguageCommand}" />
     </StackLayout>
 </ContentPage>

@@ -8,7 +8,9 @@
              x:DataType="{x:Type gallery:GalleryViewModel}">
 
     <StackLayout>
-        <Label Text="List" />
+        <ActivityIndicator
+            IsVisible="{Binding IsGalleryLoading}"
+            IsRunning="{Binding IsGalleryLoading}"/>
         
         <CollectionView ItemsSource="{Binding Photos}"
                         ItemSizingStrategy="MeasureFirstItem">

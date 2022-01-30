@@ -7,6 +7,10 @@ using Xamarin.Basics.Mvvm.Navigations.Services;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.Basics.Mvvm.Views;
 using Xamarin.Basics.Services.Alerts;
+using Xamarin.Basics.Services.Languages;
+using Xamarin.Basics.Services.Loggers;
+using Xamarin.Basics.Services.Messagings;
+using Xamarin.Basics.Services.Toasts;
 using Xamarin.Basics.Settings;
 using Xamarin.Forms;
 using XamarinTemplate.Abstractions.Photos;
@@ -14,7 +18,11 @@ using XamarinTemplate.Api.Collections.Photos.Factories;
 using XamarinTemplate.Repositories.Photos;
 using XamarinTemplate.Services.Alerts;
 using XamarinTemplate.Services.HttpMessageHandlers;
+using XamarinTemplate.Services.Languages;
+using XamarinTemplate.Services.Loggers;
+using XamarinTemplate.Services.Messagings;
 using XamarinTemplate.Services.Navigations;
+using XamarinTemplate.Services.Toasts;
 using XamarinTemplate.Settings;
 
 namespace XamarinTemplate.Services.Containers
@@ -52,7 +60,12 @@ namespace XamarinTemplate.Services.Containers
             #region Services
             
             _container.Register<IAlertService, AlertService>();
+            _container.Register<ILanguageService, LanguageService>();
+            _container.Register<ILoggerService, LoggerService>();
+            _container.Register<IMessageService, MessageService>();
             _container.Register<INavigationService, NavigationService>();
+            _container.Register<IToastService, ToastService>();
+            
             _container.Register<IAppNavigationService, AppNavigationService>();
 
             _container.Register<IPhotoService, PhotoService>();

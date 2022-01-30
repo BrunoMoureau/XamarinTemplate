@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using XamarinTemplate.Abstractions.Photos;
 using XamarinTemplate.Abstractions.Photos.Models;
 using XamarinTemplate.Api.Collections.Photos;
+using XamarinTemplate.Api.Policies;
 
 namespace XamarinTemplate.Repositories.Photos
 {
@@ -20,7 +21,10 @@ namespace XamarinTemplate.Repositories.Photos
 
         public async Task<List<Photo>> GetPhotosAsync(CancellationToken cancellationToken)
         {
-            var photos = await _photoApi.GetPhotosAsync(cancellationToken).ConfigureAwait(false);
+            var photos = await Policies.Retry
+                .ExecuteAsync(() => _photoApi.GetPhotosAsync(cancellationToken))
+                .ConfigureAwait(false);
+            
             cancellationToken.ThrowIfCancellationRequested();
             
             return photos.Select(p => new Photo

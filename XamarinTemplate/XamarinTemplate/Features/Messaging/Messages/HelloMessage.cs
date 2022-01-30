@@ -4,6 +4,5 @@ namespace XamarinTemplate.Features.Messaging.Messages
 {
     public class HelloMessage : IMessage
     {
-        
     }
 }
