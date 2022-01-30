@@ -2,6 +2,7 @@
 using Xamarin.Basics.Services.Alerts;
 using Xamarin.Basics.Services.Messagings;
 using XamarinTemplate.Features.Messaging.Messages;
+using XamarinTemplate.Resources.Languages;
 
 namespace XamarinTemplate.Features.Messaging
 {
@@ -32,7 +33,7 @@ namespace XamarinTemplate.Features.Messaging
 
         public void OnMessageReceived(object sender, HelloMessage message)
         {
-            _alertService.Show("Hello!", "(☞ﾟヮﾟ)☞");
+            _alertService.Show(AppResources.Alert_Hello, "(☞ﾟヮﾟ)☞");
         }
     }
 }

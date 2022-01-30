@@ -2,7 +2,18 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinTemplate.App">
+    
     <Application.Resources>
-
+<!-- Merged dictionaries -->
+        <!-- Be aware, when some files depends on others, they must be declared after them -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/AppColors.xaml" />
+                <ResourceDictionary Source="Resources/AppBrushes.xaml" />
+                <ResourceDictionary Source="Resources/AppConverters.xaml" />
+                <ResourceDictionary Source="Resources/AppDimensions.xaml" />
+                <ResourceDictionary Source="Resources/AppFonts.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

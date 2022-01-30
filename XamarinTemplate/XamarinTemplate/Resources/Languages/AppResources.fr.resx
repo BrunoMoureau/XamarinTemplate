@@ -42,4 +42,7 @@
     <data name="Error_Generic" xml:space="preserve">
         <value>Une erreur inconnue est survenue, veuillez réessayer plus tard.</value>
     </data>
+    <data name="Alert_Hello" xml:space="preserve">
+        <value>Salut!</value>
+    </data>
 </root>

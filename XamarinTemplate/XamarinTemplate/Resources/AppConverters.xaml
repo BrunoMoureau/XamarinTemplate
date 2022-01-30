@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xaml-comp compile="true" ?>
+
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    
+    <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+    <xct:VariableMultiValueConverter x:Key="AllFalseMultiConverter" ConditionType="None" />
+    <xct:VariableMultiValueConverter x:Key="AnyConverter" ConditionType="Any" />
+    <xct:VariableMultiValueConverter x:Key="AllTrueMultiConverter" ConditionType="All" />
+</ResourceDictionary>

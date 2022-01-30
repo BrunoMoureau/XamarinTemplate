@@ -88,6 +88,15 @@ namespace XamarinTemplate.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hello!.
+        /// </summary>
+        internal static string Alert_Hello {
+            get {
+                return ResourceManager.GetString("Alert_Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have lost your connection. Try again..
         /// </summary>
         internal static string Error_Connection_Lost {
