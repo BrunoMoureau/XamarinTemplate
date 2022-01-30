@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Xamarin.Basics.Services.Alerts;
 using Xamarin.Basics.Services.Toasts;
 using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;

@@ -1,5 +1,4 @@
 ﻿using Xamarin.Basics.Mvvm.Views;
-using XamarinTemplate.Features.Main;
 
 namespace XamarinTemplate.Features.Language
 {

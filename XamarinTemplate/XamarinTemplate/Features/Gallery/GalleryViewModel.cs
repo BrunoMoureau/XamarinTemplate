@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Basics.Extensions.Tasks;
 using Xamarin.Basics.Mvvm.ViewModels;
