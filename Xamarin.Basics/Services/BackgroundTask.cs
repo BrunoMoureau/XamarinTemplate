@@ -5,7 +5,7 @@ using Xamarin.Basics.Helpers;
 
 namespace Xamarin.Basics.Services
 {
-    public class BackgroundService
+    public class BackgroundTask
     {
         private CancellationTokenSource _cancellationTokenSource;
 

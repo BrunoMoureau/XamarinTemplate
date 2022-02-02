@@ -52,7 +52,6 @@ namespace XamarinTemplate.Services.Containers
             #region Settings
             
             var appSettings = new AppSettings(_assembly);
-
             _container.RegisterInstance(appSettings.Get<EnvironmentSettings>("Environment"));
             
             #endregion

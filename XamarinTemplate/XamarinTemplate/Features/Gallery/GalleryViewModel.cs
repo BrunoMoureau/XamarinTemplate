@@ -23,7 +23,7 @@ namespace XamarinTemplate.Features.Gallery
         private readonly IPhotoService _photoService;
         private readonly IToastService _toastService;
         private readonly ILoggerService _loggerService;
-        private readonly BackgroundService _getPhotos = new();
+        private readonly BackgroundTask _getPhotosTask = new();
 
         private bool _isGalleryLoading;
 
@@ -57,7 +57,7 @@ namespace XamarinTemplate.Features.Gallery
 
             try
             {
-                var photos = await _getPhotos.RunAsync(c => _photoService.GetPhotosAsync(c));
+                var photos = await _getPhotosTask.RunAsync(c => _photoService.GetPhotosAsync(c));
                 Photos.ReplaceRange(photos);
             }
             catch (OperationCanceledException)
@@ -84,7 +84,7 @@ namespace XamarinTemplate.Features.Gallery
 
         public void Unload()
         {
-            _getPhotos.Cancel();
+            _getPhotosTask.Cancel();
         }
     }
 }

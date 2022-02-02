@@ -4,7 +4,7 @@
              x:Class="XamarinTemplate.App">
     
     <Application.Resources>
-<!-- Merged dictionaries -->
+        <!-- Merged dictionaries -->
         <!-- Be aware, when some files depends on others, they must be declared after them -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
