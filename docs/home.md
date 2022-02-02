@@ -29,6 +29,8 @@ I recommend using [Refit](https://github.com/reactiveui/refit) and [Polly](https
 Every HTTP call is located in a service that acts as an abstraction layer between your ViewModels and your API.
 In my opinion, ViewModels should not be aware how your data are retrieved or sent.
 
+![alt text](https://github.com/BrunoMoureau/XamarinTemplate/blob/master/docs/images/service_graph.png?raw=true)
+
 ```mermaid
 graph LR
 
