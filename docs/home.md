@@ -1,3 +1,5 @@
+
+
 # Welcome to Xamarin.Template!
 Hi ! 
 I wanted to share some of my knowledge about Xamarin.Forms.
@@ -6,7 +8,7 @@ The goal of this repository is to give some best practices for your next Xamarin
 I hope you will find some parts useful and learn something from them !
 
 ## Architecture
-Besides Xamarin.Forms projects, the solution contains some other useful projects :
+Besides Xamarin.Forms projects, the solution contains some other projects :
  -  **Xamarin.Basics** : provides a set of interfaces and tools to use inside your app.
  -  **Xamarin.Abstractions** : contains some business interfaces and domain objects.
  -  **Xamarin.Api** : contains HTTP logics to communicate with a backend server.
@@ -30,25 +32,6 @@ Every HTTP call is located in a service that acts as an abstraction layer betwee
 In my opinion, ViewModels should not be aware how your data are retrieved or sent.
 
 ![alt text](https://github.com/BrunoMoureau/XamarinTemplate/blob/master/docs/images/service_graph.png?raw=true)
-
-```mermaid
-graph LR
-
-A(ViewModel)
-B(PhotoService)
-C(API - Refit)
-D{Backend server}
-E(Policy - Polly)
-
-A -- I want photos! --> B
-B -- GetPhotosAsync --> C
-C -- I received exception, should I retry  or stop ? --> E
-E -- You lost connection, try again! --> C
-C -- GET api/photos --> D
-D -- Response --> C
-C -- Response --> B
-B -- List<Photo> --> A
-```
 
 ## AppSettings & Settings objects
 
@@ -302,4 +285,56 @@ public class MessagingViewModel : ObservableObject, IViewModel
 
 ## MVVM & Navigation
 
-todo
+### MVVM
+
+There are some interface to define how each page should be handled by the `NavigationService`.
+
+- **IRootView** : 
+`NavigationService` will replace the current `Applicaton.Current.MainPage` by this page.
+
+- **IStackView** 
+`NavigationService` will replaces current `Applicaton.Current.MainPage` by a `NavigationPage` with this page as the first one in the stack.
+
+- **IModalView**
+`NavigationService` will push this page as modal in the current `NavigationPage`.
+
+They all inherit from an `IView` :
+```
+public interface IView : ILoadable  
+{  
+	object BindingContext { get; }  
+	IViewModel<object> ViewModel => BindingContext as IViewModel<object>;  
+}
+```
+
+A `ViewModel` has also its own dedicated interface.
+```
+public interface IViewModel : IViewModel<object>  
+{  
+}
+  
+public interface IViewModel<in TParams> : ILoadable  
+{  
+	public Task InitializeAsync(TParams @params);  
+}
+```
+
+`IView` and `IViewModel` both inherit from `ILoadable`, an interface used by the `NavigationService` each time a navigation occurs.
+
+```
+public interface ILoadable  
+{  
+	public void Load();  
+	public void Unload();  
+}
+```
+
+It is a safe place to register to and unregister from events. It is also useful to prepare a singleton ViewModel and clean its previous data.
+
+### Navigation
+
+//todo
+
+
+
+

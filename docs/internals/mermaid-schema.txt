@@ -1,0 +1,18 @@
+```mermaid
+graph LR
+
+A(ViewModel)
+B(PhotoService)
+C(API - Refit)
+D{Backend server}
+E(Policy - Polly)
+
+A -- I want photos! --> B
+B -- GetPhotosAsync --> C
+C -- I received exception, should I retry  or stop ? --> E
+E -- You lost connection, try again! --> C
+C -- GET api/photos --> D
+D -- Response --> C
+C -- Response --> B
+B -- List<Photo> --> A
+```
