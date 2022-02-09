@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.Views;
 
-namespace Xamarin.Basics.Mvvm.Navigations
+namespace Xamarin.Basics.Mvvm.Navigations.Interfaces
 {
     public interface INavigationService
     {

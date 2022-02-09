@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.Navigations;
+using Xamarin.Basics.Mvvm.Navigations.Interfaces;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.CommunityToolkit.ObjectModel;
 using XamarinTemplate.Features.Gallery;

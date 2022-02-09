@@ -1,4 +1,5 @@
 ﻿using Xamarin.Basics.Mvvm.Navigations;
+using Xamarin.Basics.Mvvm.Navigations.Interfaces;
 using Xamarin.Basics.Services.Languages;
 using Xamarin.Forms.Xaml;
 using XamarinTemplate.Features.Main;

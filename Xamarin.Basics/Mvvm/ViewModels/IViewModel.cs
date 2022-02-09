@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Xamarin.Basics.Mvvm.Navigations.Interfaces;
 
 namespace Xamarin.Basics.Mvvm.ViewModels
 {
@@ -6,11 +7,8 @@ namespace Xamarin.Basics.Mvvm.ViewModels
     {
     }
 
-    public interface IViewModel<in TParams>
+    public interface IViewModel<in TParams> : ILoadable
     {
         public Task InitializeAsync(TParams @params);
-
-        public void Load();
-        public void Unload();
     }
 }

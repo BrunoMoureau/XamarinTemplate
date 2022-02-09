@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Basics.Mvvm.Navigations.Factories;
+using Xamarin.Basics.Mvvm.Navigations.Interfaces;
 using Xamarin.Basics.Mvvm.Navigations.Services;
 using Xamarin.Basics.Mvvm.ViewModels.Utils;
 using Xamarin.Basics.Mvvm.Views;
