@@ -27,6 +27,5 @@ namespace Xamarin.Basics.Mvvm.Navigations.Interfaces
 
         Task PopAsync(bool animated = true);
         Task PopModalAsync(bool animated = true);
-        bool AnyModalDisplayed();
     }
 }

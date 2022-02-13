@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Xamarin.Basics.Mvvm.Views.Utils
+﻿namespace Xamarin.Basics.Mvvm.Views.Utils
 {
     public static class ViewUtils
     {
@@ -14,14 +12,6 @@ namespace Xamarin.Basics.Mvvm.Views.Utils
         {
             view?.Unload();
             view?.ViewModel?.Unload();
-        }
-
-        public static void Unload(IEnumerable<IView> views)
-        {
-            foreach (var view in views)
-            {
-                Unload(view);
-            }
         }
     }
 }
