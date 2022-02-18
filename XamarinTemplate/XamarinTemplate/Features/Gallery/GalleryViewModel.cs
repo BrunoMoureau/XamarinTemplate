@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Basics.Extensions.Tasks;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.Basics.Services;
 using Xamarin.Basics.Services.Loggers;
-using Xamarin.Basics.Services.Messagings;
 using Xamarin.Basics.Services.Toasts;
 using Xamarin.CommunityToolkit.ObjectModel;
 using XamarinTemplate.Abstractions.Photos;
@@ -14,10 +15,6 @@ using XamarinTemplate.Resources.Languages;
 
 namespace XamarinTemplate.Features.Gallery
 {
-    public class PhotoMessage : IMessage
-    {
-    }
-
     public class GalleryViewModel : ObservableObject, IViewModel
     {
         private readonly IPhotoService _photoService;
