@@ -67,5 +67,61 @@ namespace Xamarin.Basics.Tests.Mvvm.Navigations
             // Assert
             viewModel.Verify(m => m.InitializeAsync(It.IsAny<object>()), Times.Once);
         }
+
+        [Fact]
+        public void Initializes_ViewModel_On_StackView_Pushed()
+        {
+            // Arrange
+            Mock<IAppNavigationService> appNavigationService = An.AppNavigationService;
+            Mock<INavigationController> navigationController = A.NavigationController;
+
+            Mock<IViewModel<object>> viewModel = A.ViewModel;
+            Mock<IStackView> stackView = A.StackView
+                .Calling(m => m.ViewModel)
+                .Returns(viewModel);
+
+            Mock<IViewFactory> viewFactory = A.ViewFactory
+                .Calling(m => m.Create<IStackView>())
+                .Returns(stackView);
+
+            var navigationService = new NavigationService(
+                appNavigationService.Object,
+                navigationController.Object,
+                viewFactory.Object);
+
+            // Act
+            navigationService.PushAsync<IStackView>();
+
+            // Assert
+            viewModel.Verify(m => m.InitializeAsync(It.IsAny<object>()), Times.Once);
+        }
+
+        [Fact]
+        public void Initializes_ViewModel_On_ModalView_Pushed()
+        {
+            // Arrange
+            Mock<IAppNavigationService> appNavigationService = An.AppNavigationService;
+            Mock<INavigationController> navigationController = A.NavigationController;
+
+            Mock<IViewModel<object>> viewModel = A.ViewModel;
+            Mock<IModalView> modalView = A.ModalView
+                .Calling(m => m.ViewModel)
+                .Returns(viewModel);
+
+            Mock<IViewFactory> viewFactory = A.ViewFactory
+                .Calling(m => m.Create<IModalView>())
+                .Returns(modalView);
+
+            var navigationService = new NavigationService(
+                appNavigationService.Object,
+                navigationController.Object,
+                viewFactory.Object);
+
+            // Act
+            navigationService.PushModalAsync<IModalView>();
+
+            // Assert
+            viewModel.Verify(m => m.InitializeAsync(It.IsAny<object>()), Times.Once);
+        }
     }
 }
