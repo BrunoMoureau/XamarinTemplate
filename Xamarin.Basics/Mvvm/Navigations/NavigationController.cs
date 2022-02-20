@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Basics.Mvvm.Navigations.Controllers;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Collections;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
@@ -9,27 +10,27 @@ namespace Xamarin.Basics.Mvvm.Navigations
 {
     public class NavigationController : INavigationController
     {
-        private IViewController _viewController;
+        private ViewController _viewController;
 
-        public void UseRootViewController(IView view)
+        public void UseRootViewController(IRootView view)
         {
-            _viewController?.Unload();
+            UnloadCurrentViews();
             _viewController = new RootViewController(view);
-            _viewController.Load();
+            ViewUtils.Load(view);
         }
-        
-        public void UseStackRootViewController(IView view)
+
+        public void UseStackRootViewController(IStackView view)
         {
-            _viewController?.Unload();
+            UnloadCurrentViews();
             _viewController = new StackViewController(view);
-            _viewController.Load();
+            ViewUtils.Load(view);
         }
 
         public void OnViewPushed(IStackView stackView)
         {
-            if (_viewController is IStackViewCollection stackViewCollection)
+            if (_viewController is IStackViewCollection collection)
             {
-                stackViewCollection.NavigationStack.Add(stackView);
+                collection.AddView(stackView);
             }
 
             ViewUtils.Load(stackView);
@@ -37,9 +38,9 @@ namespace Xamarin.Basics.Mvvm.Navigations
 
         public void OnViewPopped(IStackView stackView)
         {
-            if (_viewController is IStackViewCollection stackViewCollection)
+            if (_viewController is IStackViewCollection collection)
             {
-                stackViewCollection.NavigationStack.Remove(stackView);
+                collection.RemoveView(stackView);
             }
 
             ViewUtils.Unload(stackView);
@@ -47,9 +48,9 @@ namespace Xamarin.Basics.Mvvm.Navigations
 
         public void OnModalViewPushed(IModalView modalView)
         {
-            if (_viewController is IModalViewCollection modalViewCollection)
+            if (_viewController is IModalViewCollection collection)
             {
-                modalViewCollection.ModalStack.Add(modalView);
+                collection.AddView(modalView);
             }
 
             ViewUtils.Load(modalView);
@@ -57,9 +58,9 @@ namespace Xamarin.Basics.Mvvm.Navigations
 
         public void OnModalViewPopped(IModalView modalView)
         {
-            if (_viewController is IModalViewCollection modalViewCollection)
+            if (_viewController is IModalViewCollection collection)
             {
-                modalViewCollection.ModalStack.Remove(modalView);
+                collection.RemoveView(modalView);
             }
 
             ViewUtils.Unload(modalView);
@@ -69,7 +70,7 @@ namespace Xamarin.Basics.Mvvm.Navigations
         {
             if (_viewController is IStackViewCollection collection)
             {
-                return collection.NavigationStack.Last();
+                return collection.GetLastOrDefault();
             }
 
             return null;
@@ -79,10 +80,21 @@ namespace Xamarin.Basics.Mvvm.Navigations
         {
             if (_viewController is IModalViewCollection collection)
             {
-                return collection.ModalStack.Last();
+                return collection.GetLastOrDefault();
             }
 
             return null;
+        }
+        
+        private void UnloadCurrentViews()
+        {
+            if (_viewController == null) return;
+            
+            var views = _viewController.GetAllViews();
+            foreach (var view in views)
+            {
+                ViewUtils.Unload(view);
+            }
         }
     }
 }

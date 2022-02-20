@@ -5,6 +5,8 @@ namespace Xamarin.Basics.Mvvm.Navigations.Controllers.Collections
 {
     public interface IModalViewCollection
     {
-        List<IModalView> ModalStack { get; }
+        void AddView(IModalView view);
+        void RemoveView(IModalView view);
+        IModalView GetLastOrDefault();
     }
 }

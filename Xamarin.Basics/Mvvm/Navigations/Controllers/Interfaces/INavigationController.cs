@@ -4,8 +4,8 @@ namespace Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces
 {
     public interface INavigationController : INavigationCallback
     {
-        void UseRootViewController(IView view); 
-        void UseStackRootViewController(IView view);
+        void UseRootViewController(IRootView view); 
+        void UseStackRootViewController(IStackView view);
         IStackView GetPoppableView();
         IModalView GetPoppableModalView();
     }

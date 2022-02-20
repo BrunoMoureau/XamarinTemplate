@@ -1,33 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Collections;
-using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
 using Xamarin.Basics.Mvvm.Views;
-using Xamarin.Basics.Mvvm.Views.Utils;
 
 namespace Xamarin.Basics.Mvvm.Navigations.Controllers
 {
-    public class RootViewController : IViewController, IModalViewCollection
+    public class RootViewController : ViewController, IModalViewCollection
     {
-        public IView Root { get; }
         public List<IModalView> ModalStack { get; } = new();
 
-        public RootViewController(IView root)
+        public RootViewController(IRootView rootView) : base(rootView)
         {
-            Root = root;
         }
 
-        public void Load()
-        {
-            ViewUtils.Load(Root);
-        }
+        public void AddView(IModalView view) => ModalStack.Add(view);
+        public void RemoveView(IModalView view) => ModalStack.Remove(view);
+        public IModalView GetLastOrDefault() => ModalStack.LastOrDefault();
 
-        public void Unload()
+        public override List<IView> GetAllViews()
         {
-            ViewUtils.Unload(Root);
-            foreach (var modalView in ModalStack)
-            {
-                ViewUtils.Unload(modalView);
-            }
+            var views = new List<IView> { Root };
+            views.AddRange(ModalStack);
+
+            return views;
         }
     }
 }
