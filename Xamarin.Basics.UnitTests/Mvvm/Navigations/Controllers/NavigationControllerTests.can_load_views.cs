@@ -1,6 +1,5 @@
 ﻿using Moq;
 using Xamarin.Basics.Mvvm.Navigations;
-using Xamarin.Basics.Mvvm.Navigations.Controllers;
 using Xamarin.Basics.Mvvm.Views;
 using Xamarin.Basics.Tests.Helpers.Statics;
 using Xunit;

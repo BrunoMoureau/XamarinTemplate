@@ -1,5 +1,4 @@
-﻿using Moq;
-using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
+﻿using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
 using Xamarin.Basics.Mvvm.Navigations.Factories;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.Basics.Mvvm.Views;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Xamarin.Basics.Mvvm.Navigations.Controllers;
+﻿using Xamarin.Basics.Mvvm.Navigations.Controllers;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Collections;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
 using Xamarin.Basics.Mvvm.Views;
