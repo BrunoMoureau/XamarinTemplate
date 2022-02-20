@@ -13,10 +13,10 @@ namespace Xamarin.Basics.Mvvm.Navigations
         private readonly IAppNavigationService _appNavigationService;
         private readonly INavigationController _navigationController;
         private readonly IViewFactory _viewFactory;
-        
+
         public NavigationService(
-            IAppNavigationService appNavigationService, 
-            INavigationController navigationController, 
+            IAppNavigationService appNavigationService,
+            INavigationController navigationController,
             IViewFactory viewFactory)
         {
             _appNavigationService = appNavigationService;
@@ -29,14 +29,14 @@ namespace Xamarin.Basics.Mvvm.Navigations
 
         public Task SetRootAsync<TView, TParams>(TParams parameters) where TView : IRootView
         {
-            var view = _viewFactory.Create<TView>();
+            var view = CreateView<TView>();
 
             _appNavigationService.OnRootViewChanging();
             _appNavigationService.SetRootView(view);
             _navigationController.UseRootViewController(view);
             _appNavigationService.OnRootViewChanged();
 
-            return ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
+            return ViewModelUtils.InitializeAsync(view.ViewModel, parameters);
         }
 
         public Task SetStackRootAsync<TView>() where TView : IStackView
@@ -44,14 +44,14 @@ namespace Xamarin.Basics.Mvvm.Navigations
 
         public Task SetStackRootAsync<TView, TParams>(TParams parameters) where TView : IStackView
         {
-            var view = _viewFactory.Create<TView>();
+            var view = CreateView<TView>();
 
             _appNavigationService.OnRootViewChanging();
             _appNavigationService.SetStackRootView(view);
             _navigationController.UseStackRootViewController(view);
             _appNavigationService.OnRootViewChanged();
 
-            return ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
+            return ViewModelUtils.InitializeAsync(view.ViewModel, parameters);
         }
 
         public Task PushAsync<TView>(bool animated = true) where TView : IStackView
@@ -60,7 +60,7 @@ namespace Xamarin.Basics.Mvvm.Navigations
         public async Task PushAsync<TView, TParams>(TParams parameters, bool animated = true)
             where TView : IStackView
         {
-            var view = _viewFactory.Create<TView>();
+            var view = CreateView<TView>();
             await _appNavigationService.PushViewAsync(view, animated);
 
             await ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
@@ -72,13 +72,29 @@ namespace Xamarin.Basics.Mvvm.Navigations
         public async Task PushModalAsync<TView, TParams>(TParams parameters, bool animated = true)
             where TView : IModalView
         {
-            var modalView = _viewFactory.Create<TView>();
-            await _appNavigationService.PushModalViewAsync(modalView, animated);
+            var view = CreateView<TView>();
+            await _appNavigationService.PushModalViewAsync(view, animated);
 
-            await ViewModelUtils.InitializeAsync(modalView?.ViewModel, parameters);
+            await ViewModelUtils.InitializeAsync(view?.ViewModel, parameters);
         }
 
-        public Task PopAsync(bool animated = true) => _appNavigationService.PopViewAsync(animated);
-        public Task PopModalAsync(bool animated = true) => _appNavigationService.PopModalViewAsync(animated);
+        public Task PopAsync(bool animated = true)
+        {
+            var view = _navigationController.GetPoppableView();
+            return view != null 
+                ? _appNavigationService.PopViewAsync(view, animated)
+                : Task.CompletedTask;
+        }
+
+        public Task PopModalAsync(bool animated = true)
+        {
+            var view = _navigationController.GetPoppableModalView();
+            return view != null 
+                ? _appNavigationService.PopModalViewAsync(view, animated)
+                : Task.CompletedTask;
+        }
+
+        private TView CreateView<TView>() where TView : IView
+            => _viewFactory.Create<TView>();
     }
 }

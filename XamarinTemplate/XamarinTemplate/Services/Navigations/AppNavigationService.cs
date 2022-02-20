@@ -39,9 +39,10 @@ namespace XamarinTemplate.Services.Navigations
         public Task PushModalViewAsync<TView>(TView view, bool animated) where TView : IModalView
             => Application.Current.MainPage.Navigation?.PushModalAsync(view as Page, animated);
 
-        public Task PopViewAsync(bool animated) => Application.Current.MainPage.Navigation?.PopAsync(animated);
+        public Task PopViewAsync<TView>(TView view, bool animated) where TView : IStackView
+            => Application.Current.MainPage.Navigation?.PopAsync(animated);
 
-        public Task PopModalViewAsync(bool animated) =>
+        public Task PopModalViewAsync<TView>(TView view, bool animated) where TView : IModalView =>
             Application.Current.MainPage.Navigation?.PopModalAsync(animated);
 
         public void OnRootViewChanging()

@@ -1,4 +1,5 @@
-﻿using Xamarin.Basics.Mvvm.Navigations.Controllers;
+﻿using System.Linq;
+using Xamarin.Basics.Mvvm.Navigations.Controllers;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Collections;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
 using Xamarin.Basics.Mvvm.Views;
@@ -62,6 +63,26 @@ namespace Xamarin.Basics.Mvvm.Navigations
             }
 
             ViewUtils.Unload(modalView);
+        }
+        
+        public IStackView GetPoppableView()
+        {
+            if (_viewController is IStackViewCollection collection)
+            {
+                return collection.NavigationStack.Last();
+            }
+
+            return null;
+        }
+        
+        public IModalView GetPoppableModalView()
+        {
+            if (_viewController is IModalViewCollection collection)
+            {
+                return collection.ModalStack.Last();
+            }
+
+            return null;
         }
     }
 }

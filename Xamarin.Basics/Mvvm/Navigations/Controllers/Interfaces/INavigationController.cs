@@ -6,5 +6,7 @@ namespace Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces
     {
         void UseRootViewController(IView view); 
         void UseStackRootViewController(IView view);
+        IStackView GetPoppableView();
+        IModalView GetPoppableModalView();
     }
 }
