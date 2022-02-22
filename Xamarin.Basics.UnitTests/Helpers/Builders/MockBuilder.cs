@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Moq;
+using Xamarin.Basics.Mvvm.Views;
 
 namespace Xamarin.Basics.Tests.Helpers.Builders
 {
@@ -14,7 +15,7 @@ namespace Xamarin.Basics.Tests.Helpers.Builders
             _mock = new Mock<T>();
         }
 
-        public MockBuilder(MockBehavior behavior, params object[] args)
+        public MockBuilder(IStackView behavior, params object[] args)
         {
             _mock = new Mock<T>(behavior, args);
         }

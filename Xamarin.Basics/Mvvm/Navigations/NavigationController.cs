@@ -1,5 +1,6 @@
 ﻿using Xamarin.Basics.Mvvm.Navigations.Controllers;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Collections;
+using Xamarin.Basics.Mvvm.Navigations.Controllers.Factories;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
 using Xamarin.Basics.Mvvm.Views;
 using Xamarin.Basics.Mvvm.Views.Utils;
@@ -8,19 +9,26 @@ namespace Xamarin.Basics.Mvvm.Navigations
 {
     public class NavigationController : INavigationController
     {
+        private readonly IViewControllerFactory _viewControllerFactory;
+        
         private ViewController _viewController;
+
+        public NavigationController(IViewControllerFactory viewControllerFactory)
+        {
+            _viewControllerFactory = viewControllerFactory;
+        }
 
         public void UseRootViewController(IRootView view)
         {
             UnloadCurrentViews();
-            _viewController = new RootViewController(view);
+            _viewController = _viewControllerFactory.CreateController(view);
             ViewUtils.Load(view);
         }
 
         public void UseStackRootViewController(IStackView view)
         {
             UnloadCurrentViews();
-            _viewController = new StackViewController(view);
+            _viewController = _viewControllerFactory.CreateController(view);
             ViewUtils.Load(view);
         }
 
