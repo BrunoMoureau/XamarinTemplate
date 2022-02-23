@@ -11,39 +11,7 @@ namespace Xamarin.Basics.Tests.Mvvm.Navigations.Controllers
     public partial class NavigationControllerTests
     {
         [Fact]
-        public void Can_Load_RootView()
-        {
-            // Arrange
-            Mock<IRootView> rootView = A.RootView;
-            Mock<IViewControllerFactory> viewControllerFactory = A.ViewControllerFactory;
-
-            var controller = new NavigationController(viewControllerFactory.Object);
-
-            // Act
-            controller.UseRootViewController(rootView.Object);
-
-            // Assert
-            rootView.Verify(m => m.Load(), Times.Once);
-        }
-        
-        [Fact]
-        public void Can_Load_StackRootView()
-        {
-            // Arrange
-            Mock<IStackView> rootStackView = A.StackView;
-            Mock<IViewControllerFactory> viewControllerFactory = A.ViewControllerFactory;
-            
-            var controller = new NavigationController(viewControllerFactory.Object);
-
-            // Act
-            controller.UseStackRootViewController(rootStackView.Object);
-
-            // Assert
-            rootStackView.Verify(m => m.Load(), Times.Once);
-        }
-        
-        [Fact]
-        public void Can_Load_Pushed_StackView()
+        public void Can_Unload_Popped_StackView()
         {
             // Arrange
             Mock<IStackView> rootStackView = A.StackView;
@@ -58,14 +26,14 @@ namespace Xamarin.Basics.Tests.Mvvm.Navigations.Controllers
             controller.UseStackRootViewController(rootStackView.Object);
 
             // Act
-            controller.OnViewPushed(stackView.Object);
+            controller.OnViewPopped(stackView.Object);
 
             // Assert
-            stackView.Verify(m => m.Load(), Times.Once);
+            stackView.Verify(m => m.Unload(), Times.Once);
         }
         
         [Fact]
-        public void Can_Load_Pushed_ModalView()
+        public void Can_Unload_Popped_ModalView()
         {
             // Arrange
             Mock<IStackView> rootStackView = A.StackView;
@@ -80,10 +48,10 @@ namespace Xamarin.Basics.Tests.Mvvm.Navigations.Controllers
             controller.UseStackRootViewController(rootStackView.Object);
 
             // Act
-            controller.OnModalViewPushed(modalView.Object);
+            controller.OnModalViewPopped(modalView.Object);
 
             // Assert
-            modalView.Verify(m => m.Load(), Times.Once);
+            modalView.Verify(m => m.Unload(), Times.Once);
         }
     }
 }
