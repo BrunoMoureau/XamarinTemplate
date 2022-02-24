@@ -5,7 +5,7 @@ namespace Xamarin.Basics.Mvvm.Navigations.Controllers
 {
     public abstract class ViewController
     {
-        protected IView Root { get; }
+        public IView Root { get; }
 
         protected ViewController(IView root)
         {

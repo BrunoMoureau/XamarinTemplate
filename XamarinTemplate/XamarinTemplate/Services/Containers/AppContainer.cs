@@ -2,7 +2,6 @@
 using System.Reflection;
 using DryIoc;
 using Xamarin.Basics.Mvvm.Navigations;
-using Xamarin.Basics.Mvvm.Navigations.Controllers.Factories;
 using Xamarin.Basics.Mvvm.Navigations.Factories;
 using Xamarin.Basics.Mvvm.Navigations.Interfaces;
 using Xamarin.Basics.Mvvm.Navigations.Services;
@@ -48,8 +47,7 @@ namespace XamarinTemplate.Services.Containers
             _container.RegisterMany(new[] { _assembly }, IsClassWithViewModelInterface);
 
             _container.Register<IViewFactory, ViewFactory>();
-            _container.Register<IViewControllerFactory, ViewControllerFactory>();
-            
+
             #endregion
             
             #region Settings

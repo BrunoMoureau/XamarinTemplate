@@ -1,6 +1,5 @@
 ﻿using Xamarin.Basics.Mvvm.Navigations.Controllers;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Collections;
-using Xamarin.Basics.Mvvm.Navigations.Controllers.Factories;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
 using Xamarin.Basics.Mvvm.Views;
 using Xamarin.Basics.Mvvm.Views.Utils;
@@ -9,29 +8,15 @@ namespace Xamarin.Basics.Mvvm.Navigations
 {
     public class NavigationController : INavigationController
     {
-        private readonly IViewControllerFactory _viewControllerFactory;
-        
         private ViewController _viewController;
-
-        public NavigationController(IViewControllerFactory viewControllerFactory)
-        {
-            _viewControllerFactory = viewControllerFactory;
-        }
-
-        public void UseRootViewController(IRootView view)
+        
+        public void SetController(ViewController viewController)
         {
             UnloadCurrentViews();
-            _viewController = _viewControllerFactory.CreateController(view);
-            ViewUtils.Load(view);
+            _viewController = viewController;
+            ViewUtils.Load(viewController.Root);
         }
-
-        public void UseStackRootViewController(IStackView view)
-        {
-            UnloadCurrentViews();
-            _viewController = _viewControllerFactory.CreateController(view);
-            ViewUtils.Load(view);
-        }
-
+        
         public void OnViewPushed(IStackView stackView)
         {
             if (_viewController is IStackViewCollection collection)
@@ -71,7 +56,7 @@ namespace Xamarin.Basics.Mvvm.Navigations
 
             ViewUtils.Unload(modalView);
         }
-        
+
         public IStackView GetPoppableView()
         {
             if (_viewController is IStackViewCollection collection)

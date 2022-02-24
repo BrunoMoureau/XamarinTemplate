@@ -10,7 +10,7 @@ namespace Xamarin.Basics.Mvvm.Navigations.Controllers
         public List<IStackView> NavigationStack { get; } = new();
         public List<IModalView> ModalStack { get; } = new();
 
-        public StackViewController(IStackView rootView) : base(rootView)
+        public StackViewController(IView rootView) : base(rootView)
         {
         }
 

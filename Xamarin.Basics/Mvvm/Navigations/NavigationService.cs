@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Xamarin.Basics.Mvvm.Navigations.Controllers;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
 using Xamarin.Basics.Mvvm.Navigations.Factories;
 using Xamarin.Basics.Mvvm.Navigations.Interfaces;
@@ -33,7 +34,7 @@ namespace Xamarin.Basics.Mvvm.Navigations
 
             _appNavigationService.OnRootViewChanging();
             _appNavigationService.SetRootView(view);
-            _navigationController.UseRootViewController(view);
+            _navigationController.SetController(new RootViewController(view));
             _appNavigationService.OnRootViewChanged();
 
             return ViewModelUtils.InitializeAsync(view.ViewModel, parameters);
@@ -48,7 +49,7 @@ namespace Xamarin.Basics.Mvvm.Navigations
 
             _appNavigationService.OnRootViewChanging();
             _appNavigationService.SetStackRootView(view);
-            _navigationController.UseStackRootViewController(view);
+            _navigationController.SetController(new StackViewController(view));
             _appNavigationService.OnRootViewChanged();
 
             return ViewModelUtils.InitializeAsync(view.ViewModel, parameters);

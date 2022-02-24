@@ -1,6 +1,4 @@
-﻿using Xamarin.Basics.Mvvm.Navigations.Controllers;
-using Xamarin.Basics.Mvvm.Navigations.Controllers.Factories;
-using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
+﻿using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
 using Xamarin.Basics.Mvvm.Navigations.Factories;
 using Xamarin.Basics.Mvvm.ViewModels;
 using Xamarin.Basics.Mvvm.Views;
@@ -18,6 +16,5 @@ namespace Xamarin.Basics.Tests.Helpers.Statics
         public static MockBuilder<IModalView> ModalView => new();
         
         public static MockBuilder<IViewModel<object>> ViewModel => new();
-        public static MockBuilder<IViewControllerFactory> ViewControllerFactory => new();
     }
 }

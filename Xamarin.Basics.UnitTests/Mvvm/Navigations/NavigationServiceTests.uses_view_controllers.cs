@@ -1,5 +1,6 @@
 ﻿using Moq;
 using Xamarin.Basics.Mvvm.Navigations;
+using Xamarin.Basics.Mvvm.Navigations.Controllers;
 using Xamarin.Basics.Mvvm.Navigations.Controllers.Interfaces;
 using Xamarin.Basics.Mvvm.Navigations.Factories;
 using Xamarin.Basics.Mvvm.Navigations.Services;
@@ -32,7 +33,7 @@ namespace Xamarin.Basics.Tests.Mvvm.Navigations
             navigationService.SetRootAsync<IRootView>();
 
             // Assert
-            navigationController.Verify(m => m.UseRootViewController(rootView.Object), Times.Once);
+            navigationController.Verify(m => m.SetController(It.IsAny<RootViewController>()), Times.Once);
         }
 
         [Fact]
@@ -56,7 +57,7 @@ namespace Xamarin.Basics.Tests.Mvvm.Navigations
             navigationService.SetStackRootAsync<IStackView>();
 
             // Assert
-            navigationController.Verify(m => m.UseStackRootViewController(stackView.Object), Times.Once);
+            navigationController.Verify(m => m.SetController(It.IsAny<StackViewController>()), Times.Once);
         }
     }
 }

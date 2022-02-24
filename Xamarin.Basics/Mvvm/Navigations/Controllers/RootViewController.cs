@@ -9,7 +9,7 @@ namespace Xamarin.Basics.Mvvm.Navigations.Controllers
     {
         public List<IModalView> ModalStack { get; } = new();
 
-        public RootViewController(IRootView rootView) : base(rootView)
+        public RootViewController(IView rootView) : base(rootView)
         {
         }
 

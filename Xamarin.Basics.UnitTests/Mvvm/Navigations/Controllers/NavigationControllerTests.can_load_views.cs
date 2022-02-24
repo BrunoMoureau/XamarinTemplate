@@ -1,7 +1,6 @@
 ﻿using Moq;
 using Xamarin.Basics.Mvvm.Navigations;
 using Xamarin.Basics.Mvvm.Navigations.Controllers;
-using Xamarin.Basics.Mvvm.Navigations.Controllers.Factories;
 using Xamarin.Basics.Mvvm.Views;
 using Xamarin.Basics.Tests.Helpers.Statics;
 using Xunit;
@@ -15,12 +14,11 @@ namespace Xamarin.Basics.Tests.Mvvm.Navigations.Controllers
         {
             // Arrange
             Mock<IRootView> rootView = A.RootView;
-            Mock<IViewControllerFactory> viewControllerFactory = A.ViewControllerFactory;
 
-            var controller = new NavigationController(viewControllerFactory.Object);
+            var controller = new NavigationController();
 
             // Act
-            controller.UseRootViewController(rootView.Object);
+            controller.SetController(new RootViewController(rootView.Object));
 
             // Assert
             rootView.Verify(m => m.Load(), Times.Once);
@@ -31,12 +29,11 @@ namespace Xamarin.Basics.Tests.Mvvm.Navigations.Controllers
         {
             // Arrange
             Mock<IStackView> rootStackView = A.StackView;
-            Mock<IViewControllerFactory> viewControllerFactory = A.ViewControllerFactory;
             
-            var controller = new NavigationController(viewControllerFactory.Object);
+            var controller = new NavigationController();
 
             // Act
-            controller.UseStackRootViewController(rootStackView.Object);
+            controller.SetController(new StackViewController(rootStackView.Object));
 
             // Assert
             rootStackView.Verify(m => m.Load(), Times.Once);
@@ -49,13 +46,8 @@ namespace Xamarin.Basics.Tests.Mvvm.Navigations.Controllers
             Mock<IStackView> rootStackView = A.StackView;
             Mock<IStackView> stackView = A.StackView;
 
-            StackViewController stackViewController = new (rootStackView.Object);
-            Mock<IViewControllerFactory> viewControllerFactory = A.ViewControllerFactory
-                .Calling(m => m.CreateController(It.IsAny<IStackView>()))
-                .Returns(stackViewController);
-
-            var controller = new NavigationController(viewControllerFactory.Object);
-            controller.UseStackRootViewController(rootStackView.Object);
+            var controller = new NavigationController();
+            controller.SetController(new StackViewController(rootStackView.Object));
 
             // Act
             controller.OnViewPushed(stackView.Object);
@@ -71,13 +63,8 @@ namespace Xamarin.Basics.Tests.Mvvm.Navigations.Controllers
             Mock<IStackView> rootStackView = A.StackView;
             Mock<IModalView> modalView = A.ModalView;
 
-            StackViewController stackViewController = new (rootStackView.Object);
-            Mock<IViewControllerFactory> viewControllerFactory = A.ViewControllerFactory
-                .Calling(m => m.CreateController(rootStackView.Object))
-                .Returns(stackViewController);
-
-            var controller = new NavigationController(viewControllerFactory.Object);
-            controller.UseStackRootViewController(rootStackView.Object);
+            var controller = new NavigationController();
+            controller.SetController(new StackViewController(rootStackView.Object));
 
             // Act
             controller.OnModalViewPushed(modalView.Object);
