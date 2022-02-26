@@ -29,6 +29,9 @@
         <WarningLevel>4</WarningLevel>
         <AndroidLinkMode>None</AndroidLinkMode>
         <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
+        <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
+        <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+        <AndroidPackageFormat>apk</AndroidPackageFormat>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <DebugSymbols>true</DebugSymbols>
@@ -40,6 +43,9 @@
         <WarningLevel>4</WarningLevel>
         <AndroidLinkMode>None</AndroidLinkMode>
         <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
+        <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
+        <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+        <AndroidPackageFormat>apk</AndroidPackageFormat>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <DebugSymbols>true</DebugSymbols>
@@ -51,6 +57,7 @@
         <AndroidManagedSymbols>true</AndroidManagedSymbols>
         <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
         <AndroidSupportedAbis>armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>
+        <AndroidPackageFormat>aab</AndroidPackageFormat>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="Mono.Android" />
@@ -88,6 +95,9 @@
             <Project>{24A02D7A-7181-4B62-8D43-A909AB436E86}</Project>
             <Name>XamarinTemplate</Name>
         </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <ProguardConfiguration Include="proguard.cfg" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
