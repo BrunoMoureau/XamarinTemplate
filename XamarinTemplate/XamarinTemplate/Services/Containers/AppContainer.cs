@@ -64,7 +64,7 @@ namespace XamarinTemplate.Services.Containers
             _container.Register<ILoggerService, LoggerService>();
             _container.Register<IMessageService, MessageService>();
             _container.Register<INavigationService, NavigationService>();
-            _container.RegisterMany<NavigationController>(Reuse.Singleton);
+            _container.Register<NavigationController>(Reuse.Singleton);
             _container.Register<IToastService, ToastService>();
             
             _container.Register<IAppNavigationService, AppNavigationService>();
