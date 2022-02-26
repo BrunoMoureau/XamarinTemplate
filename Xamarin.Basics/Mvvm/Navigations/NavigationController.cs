@@ -12,11 +12,11 @@ namespace Xamarin.Basics.Mvvm.Navigations
         
         public void SetController(ViewController viewController)
         {
-            UnloadCurrentViews();
+            UnloadCurrentViews(_viewController);
             _viewController = viewController;
-            ViewUtils.Load(viewController.Root);
+            LoadView(viewController.Root);
         }
-        
+
         public void OnViewPushed(IStackView stackView)
         {
             if (_viewController is IStackViewCollection collection)
@@ -24,7 +24,7 @@ namespace Xamarin.Basics.Mvvm.Navigations
                 collection.AddView(stackView);
             }
 
-            ViewUtils.Load(stackView);
+            LoadView(stackView);
         }
 
         public void OnViewPopped(IStackView stackView)
@@ -33,8 +33,8 @@ namespace Xamarin.Basics.Mvvm.Navigations
             {
                 collection.RemoveView(stackView);
             }
-
-            ViewUtils.Unload(stackView);
+            
+            UnloadView(stackView);
         }
 
         public void OnModalViewPushed(IModalView modalView)
@@ -44,7 +44,7 @@ namespace Xamarin.Basics.Mvvm.Navigations
                 collection.AddView(modalView);
             }
 
-            ViewUtils.Load(modalView);
+            LoadView(modalView);
         }
 
         public void OnModalViewPopped(IModalView modalView)
@@ -54,7 +54,7 @@ namespace Xamarin.Basics.Mvvm.Navigations
                 collection.RemoveView(modalView);
             }
 
-            ViewUtils.Unload(modalView);
+            UnloadView(modalView);
         }
 
         public IStackView GetPoppableView()
@@ -77,11 +77,21 @@ namespace Xamarin.Basics.Mvvm.Navigations
             return null;
         }
         
-        private void UnloadCurrentViews()
+        private void LoadView(IView view)
         {
-            if (_viewController == null) return;
+            ViewUtils.Load(view);
+        }
+        
+        private void UnloadView(IView view)
+        {
+            ViewUtils.Unload(view);
+        }
+        
+        private void UnloadCurrentViews(ViewController viewController)
+        {
+            if (viewController == null) return;
             
-            var views = _viewController.GetAllViews();
+            var views = viewController.GetAllViews();
             foreach (var view in views)
             {
                 ViewUtils.Unload(view);
