@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using DryIoc;
 using Xamarin.Basics.Mvvm.Navigations;
@@ -30,10 +32,9 @@ namespace XamarinTemplate.Services.Containers
 {
     public interface IAppContainer
     {
-        void Initialize();
         TResult Resolve<TResult>();
     }
-    
+
     public class AppContainer : IAppContainer
     {
         private readonly Container _container = new();
@@ -42,23 +43,26 @@ namespace XamarinTemplate.Services.Containers
         public void Initialize()
         {
             #region MVVM
-            
-            _container.RegisterMany(new[] { _assembly }, IsClassWithViewInterface);
-            _container.RegisterMany(new[] { _assembly }, IsClassWithViewModelInterface);
+
+            var viewTypes = GetViewTypes();
+            _container.RegisterMany(viewTypes);
+
+            var viewModelTypes = GetViewModelTypes();
+            _container.RegisterMany(viewModelTypes);
 
             _container.Register<IViewFactory, ViewFactory>();
 
             #endregion
-            
+
             #region Settings
-            
+
             var appSettings = new AppSettings(_assembly);
             _container.RegisterInstance(appSettings.Get<EnvironmentSettings>("Environment"));
-            
+
             #endregion
-            
+
             #region Services
-            
+
             _container.Register<IAlertService, AlertService>();
             _container.Register<ILanguageService, LanguageService>();
             _container.Register<ILoggerService, LoggerService>();
@@ -66,27 +70,33 @@ namespace XamarinTemplate.Services.Containers
             _container.Register<INavigationService, NavigationService>();
             _container.RegisterMany<NavigationController>(Reuse.Singleton);
             _container.Register<IToastService, ToastService>();
-            
+
             _container.Register<IAppNavigationService, AppNavigationService>();
 
             _container.Register<IPhotoService, PhotoService>();
-            
+
             #endregion
-            
+
             #region Api
-            
+
             var baseApiUrl = "https://jsonplaceholder.typicode.com/";
             _container.Register<ApiFactory>(Reuse.Singleton);
             _container.RegisterDelegate(() => DependencyService.Resolve<IHttpMessageHandlerService>().Create());
             _container.RegisterDelegate(c => c.Resolve<ApiFactory>().CreatePhotoApi(baseApiUrl));
-            
+
             #endregion
-            
+
             _container.RegisterInstance<IAppContainer>(this);
         }
 
         public TResult Resolve<TResult>() => _container.Resolve<TResult>();
-        
+
+        private IEnumerable<Type> GetViewModelTypes() =>
+            _assembly.GetTypes().Where(IsClassWithViewModelInterface).ToArray();
+
+        private IEnumerable<Type> GetViewTypes() => 
+            _assembly.GetTypes().Where(IsClassWithViewInterface).ToArray();
+
         private static bool IsClassWithViewInterface(Type type) =>
             typeof(IView).IsAssignableFrom(type) && type.IsClass;
 
