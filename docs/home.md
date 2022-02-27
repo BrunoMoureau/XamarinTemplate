@@ -1,19 +1,14 @@
-
-
-# Welcome to Xamarin.Template!
-Hi ! 
+# Welcome to Xamarin.Template
 I wanted to share some of my knowledge about Xamarin.Forms.
 
 The goal of this repository is to give some best practices for your next Xamarin.Forms project.
-I hope you will find some parts useful and learn something from them !
+I hope you will find some parts useful and learn something from them.
 
-## Architecture
-Besides Xamarin.Forms projects, the solution contains some other projects :
+## Project structure
+Besides Xamarin.Forms projects, the solution contains some other ones:
  -  **Xamarin.Basics** : provides a set of interfaces and tools to use inside your app.
- -  **Xamarin.Abstractions** : contains some business interfaces and domain objects.
- -  **Xamarin.Api** : contains HTTP logics to communicate with a backend server.
-
-Let's dive into the features!
+ -  **Xamarin.Abstractions** : contains some interfaces and objects.
+ -  **Xamarin.Api** : contains HTTP calls to communicate with a backend server.
 
 ## Features
 - API Calls & Retry Policies
@@ -26,10 +21,10 @@ Let's dive into the features!
 - MVVM & Navigation
 
 ## API Calls & Retry Policies
-I recommend using [Refit](https://github.com/reactiveui/refit) and [Polly](https://github.com/App-vNext/Polly) packages to manage API calls.
+I recommend using [Refit](https://github.com/reactiveui/refit) combined with [Polly](https://github.com/App-vNext/Polly) to manage API calls.
 
-Every HTTP call is located in a service that acts as an abstraction layer between your ViewModels and your API.
-In my opinion, ViewModels should not be aware how your data are retrieved or sent.
+Every HTTP call is located in a service. It acts as an abstraction layer between your ViewModels and your API.
+ViewModels should not be aware how your data are retrieved or sent.
 
 ![alt text](https://github.com/BrunoMoureau/XamarinTemplate/blob/master/docs/images/service_graph.png?raw=true)
 
@@ -38,11 +33,10 @@ In my opinion, ViewModels should not be aware how your data are retrieved or sen
 
 ### AppSettings
 
-There are 3 appsettings files inside the Xamarin.Template project.
-Each one contains some properties used by different runtime environments.
+There are **appsettings files** inside the Xamarin.Template project.
+Each file contains a set of **JSON properties** used by a specific runtime environment.
 
-You should notice changes when running your app in Local, Debug or Release mode. 
-This code written inside the Xamarin.Template.csproj file tells your app to use one particular appsettings file depending on your build configuration. 
+This code written inside the **Xamarin.Template.csproj** file tells your project to use one particular appsettings file depending on the selected **build configuration** (Local, Debug or Release). 
 ```
 <ItemGroup>  
  <EmbeddedResource Include="appsettings.json" Condition="!Exists('appsettings.json')" />  
@@ -55,19 +49,19 @@ Keep in mind that **you should never put sensitive information inside appsetting
 
 ### Settings objects
 
-You can retrieve appsettings properties using **AppSettings** class.
-See how **EnvironmentSettings** is retrieved and injected in the app container.
-
+You can retrieve properties from appsettings file using **AppSettings** class.
+They could be single properties or objects.
 ```
 var appSettings = new AppSettings(_assembly);  
-_container.RegisterInstance(appSettings.Get<EnvironmentSettings>("Environment"));
+appSettings.Get<EnvironmentSettings>("Environment");
 ```
 
 ## Background service
 
-In a Xamarin app, almost every line of code is executed by the **main thread**. This thread is the only thread responsible to render visual elements on your pages. You don't want it to call services, execute API calls and deserialize responses...
+In ViewModels, almost everything is executed by the **main thread**. But this thread is also the **only thread responsible to render visual elements** on your pages. Therefore, you should prevent it from executing extra works like calling services or executing API calls...
 
-You can use the **BackgroundTask** class to execute background tasks and also cancel them.
+You can use the **BackgroundTask** class to execute background tasks.
+By keeping a reference to the instance, it can also be used to cancel running task (e.g when leaving the page).
 
 ```
 public class GalleryViewModel : ObservableObject, IViewModel
@@ -100,11 +94,11 @@ public class GalleryViewModel : ObservableObject, IViewModel
 
 ## Dependency Injection
 
-I tried to find the fastest and most lightweight **dependency injection container** and end up using [DryIoc](https://github.com/dadhi/DryIoc).
+I tried to find the fastest and most lightweight **dependency injection container** and ended up using [DryIoc](https://github.com/dadhi/DryIoc).
 
-The **DI container** is really important in my opinion to write **clean code**. You should define the way to create types inside your container and it will resolve object dependencies automatically for you.
+The **DI container** is really important to write **clean code**. You should define the way types are created and reused inside your app. When a class is **registered**, its dependencies will be resolved at runtime.
 
-See how to **initialize** our app container inside **App.xaml.cs** : 
+See how the app container is initialized inside **App.xaml.cs** : 
 ```
 var appContainer = new AppContainer();  
 appContainer.Initialize();
@@ -112,81 +106,15 @@ appContainer.Initialize();
 
 ## Languages
 
-I have never found a good way to swap language in app easily until now.
+I have never found a good way to **swap language in app** easily until now.
 [Xamarin.CommunityToolkit](https://github.com/xamarin/XamarinCommunityToolkit) provides a set of super useful features you need in most apps.
 
-It provides a way to swap language of the whole app (even the pages currently loaded in the navigation !).
-
-Let's see how it is done :
-
-**Use Xamarin.CommunityToolkit.Extensions.TranslateExtension (xct:Translate)**
-
-```
-<?xml version="1.0" encoding="utf-8"?>  
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"  
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
-	xmlns:language="clr-namespace:XamarinTemplate.Features.Language;assembly=XamarinTemplate"  
-	xmlns:xct="http://xamarin.com/schemas/2020/toolkit"  
-	x:Class="XamarinTemplate.Features.Language.LanguageView"  
-	x:DataType="{x:Type language:LanguageViewModel}">  
-	
-	<StackLayout>  
-		<Button Text="{xct:Translate Lang_EN}"  
-				Command="{Binding SetCultureCommand}"  
-				CommandParameter="EN"/>  
-
-		<Button Text="{xct:Translate Lang_FR}"  
-				Command="{Binding SetCultureCommand}"  
-				CommandParameter="FR" />  
-	</StackLayout>  
-</ContentPage>
-```
-
-**Set selected culture using ILanguageService.SetCulture(string)**
-```
-public class LanguageViewModel : ObservableObject, IViewModel  
-{  
-	private readonly ILanguageService _languageService;
-	
-	public ICommand SetCultureCommand { get; }  
-	
-	public LanguageViewModel(ILanguageService languageService) 
-	{  
-		_languageService = languageService;  
-		
-		SetCultureCommand = new Command<string>(SetCulture);  
-	}
-
-	// ... 
-		
-	private void SetCulture(string culture) => _languageService.SetCulture(culture);  
-}
-```
-```
-public class LanguageService : ILanguageService  
-{  
-	public CultureInfo CultureInfo => LocalizationResourceManager.Current.CurrentCulture;  
-	
-	public void Initialize()  
-	{  
-		LocalizationResourceManager.Current.PropertyChanged += (_, _) =>  
-	        AppResources.Culture = LocalizationResourceManager.Current.CurrentCulture;  
-	        
-		LocalizationResourceManager.Current.Init(AppResources.ResourceManager);  
-	}  
-	
-	public void SetCulture(string culture)  
-	{  
-		LocalizationResourceManager.Current.CurrentCulture = new CultureInfo(culture);  
-	} 
-}
-```
+It provides a way to swap language of the whole app (even the pages currently loaded in the navigation).
 
 ## Merged dictionaries
 
-Have you ever seen an endless **App.xaml with thousand of lines** ? It is almost impossible to not be lost when searching for a specific line or style.
-
-**Merged dictionaries** can be used to join some resource dictionaries together and avoid this nightmare.
+Have you ever seen an endless **App.xaml with thousand of lines** ? 
+**Merged dictionaries** can be used to join some resource dictionaries together and avoid this.
 
 ```
 <?xml version="1.0" encoding="utf-8" ?>  
@@ -333,7 +261,11 @@ It is a safe place to register to and unregister from events. It is also useful 
 
 ### Navigation
 
-//todo
+When you want to perform a navigation, you can use the dedicated **NavigationService**.
+
+You can inject the **INavigationService** interface in any **IView** or any **IViewModel** and make use of it.
+
+
 
 
 
