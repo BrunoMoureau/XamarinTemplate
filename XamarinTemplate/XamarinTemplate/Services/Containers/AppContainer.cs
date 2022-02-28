@@ -37,11 +37,13 @@ namespace XamarinTemplate.Services.Containers
 
     public class AppContainer : IAppContainer
     {
-        private readonly Container _container = new();
+        private Container _container;
         private readonly Assembly _assembly = Assembly.GetExecutingAssembly();
 
         public void Initialize()
         {
+            _container = CreateContainer();
+            
             #region MVVM
 
             var viewTypes = GetViewTypes();
@@ -90,6 +92,18 @@ namespace XamarinTemplate.Services.Containers
         }
 
         public TResult Resolve<TResult>() => _container.Resolve<TResult>();
+
+        private Container CreateContainer()
+        {
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                // Without this rule, the iOS app crashes.
+                // https://github.com/dadhi/DryIoc/issues/156
+                return new(rules => rules.WithUseInterpretation());
+            }
+
+            return new();
+        }
 
         private IEnumerable<Type> GetViewModelTypes() =>
             _assembly.GetTypes().Where(IsClassWithViewModelInterface).ToArray();

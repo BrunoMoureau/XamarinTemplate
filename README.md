@@ -266,6 +266,11 @@ When you want to perform a navigation, you can use the dedicated **NavigationSer
 You can inject the **INavigationService** interface in any **IView** or any **IViewModel** and make use of it.
 
 
+### Notes
+There is a bug with current Xamarin.Forms version using Xcode 13.2.1
+https://github.com/xamarin/Xamarin.Forms/issues/15104
+
+
 
 
 
