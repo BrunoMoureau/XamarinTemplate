@@ -5,7 +5,6 @@ The goal of this repository is to give some best practices for your next Xamarin
 I hope you will find some parts useful and learn something from them.
 
 ## Project structure
-Besides Xamarin.Forms projects, the solution contains some other ones:
  -  **Xamarin.Basics** : provides a set of interfaces and tools to use inside your app.
  -  **Xamarin.Abstractions** : contains some interfaces and objects.
  -  **Xamarin.Api** : contains HTTP calls to communicate with a backend server.
@@ -50,7 +49,7 @@ Keep in mind that **you should never put sensitive information inside appsetting
 ### Settings objects
 
 You can retrieve properties from appsettings file using **AppSettings** class.
-They could be single properties or objects.
+They could be simple properties or objects.
 ```
 var appSettings = new AppSettings(_assembly);  
 appSettings.Get<EnvironmentSettings>("Environment");
@@ -123,7 +122,7 @@ Have you ever seen an endless **App.xaml with thousand of lines** ?
 			 x:Class="XamarinTemplate.App">  
       
     <Application.Resources>  
-        <!-- Merged dictionaries -->  
+		<!-- Merged dictionaries -->  
 		<!-- Be aware, when some files depends on others, they must be declared after them -->  
         <ResourceDictionary>  
             <ResourceDictionary.MergedDictionaries>  
@@ -146,7 +145,7 @@ I built a simple interface around **MessagingCenter** system to make some abstra
 
 Notes :
 
-With **MessagingCenter**, you can **subscribe message from object** instead of specific type **to received messages from any source**.
+With **MessagingCenter**, you can **subscribe message from object** instead of a specific type **to received messages from any source**.
 
 **Define a message with optional properties**
 ```
@@ -221,7 +220,8 @@ There are some interface to define how each page should be handled by the `Navig
 `NavigationService` will replace the current `Applicaton.Current.MainPage` by this page.
 
 - **IStackView** 
-`NavigationService` will replaces current `Applicaton.Current.MainPage` by a `NavigationPage` with this page as the first one in the stack.
+`NavigationService` will replace current `Applicaton.Current.MainPage` by a `NavigationPage` with this page as the first one of the stack.
+It can also be used to push a page above the current one in the navigation stack.
 
 - **IModalView**
 `NavigationService` will push this page as modal in the current `NavigationPage`.
