@@ -42,6 +42,8 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\MAUI.Basics\MAUI.Basics.csproj" />
+	  <ProjectReference Include="..\MAUI.Template.Abstractions\MAUI.Template.Abstractions.csproj" />
+	  <ProjectReference Include="..\MAUI.Template.Api\MAUI.Template.Api.csproj" />
 	</ItemGroup>
 
 </Project>
