@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUITemplate", "MAUITemplate\MAUITemplate.csproj", "{5A29AF7A-0F60-4E3C-91A8-84530D04A35E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUI.Template", "MAUI.Template\MAUI.Template.csproj", "{5A29AF7A-0F60-4E3C-91A8-84530D04A35E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUI.Basics", "MAUI.Basics\MAUI.Basics.csproj", "{E469A955-7407-4C72-9CDA-9216BF4EBCF7}"
 EndProject
