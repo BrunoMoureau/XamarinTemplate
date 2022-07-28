@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:messaging="clr-namespace:MAUI.Template.Features.Messaging;assembly=MAUI.Template"
+             x:Class="MAUI.Template.Features.Messaging.MessagingView"
+             x:DataType="{x:Type messaging:MessagingViewModel}">
+
+    <StackLayout>
+        <Button Text="Send Message (Viewmodel -> View)"
+                Command="{Binding SendMessageCommand}" />
+    </StackLayout>
+</ContentPage>

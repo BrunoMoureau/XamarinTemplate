@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Lang_EN" xml:space="preserve">
+        <value>Anglais</value>
+    </data>
+    <data name="Lang_FR" xml:space="preserve">
+        <value>Français</value>
+    </data>
+    <data name="Action_Show_Gallery" xml:space="preserve">
+        <value>Montrer l'exemple de galerie</value>
+    </data>
+    <data name="Action_Show_Messaging" xml:space="preserve">
+        <value>Montrer l'exemple de message</value>
+    </data>
+    <data name="Action_Show_Language" xml:space="preserve">
+        <value>Montrer l'exemple de langage</value>
+    </data>
+    <data name="Error_Connection_None" xml:space="preserve">
+        <value>Vous n'êtes pas connecté à internet</value>
+    </data>
+    <data name="Error_Connection_Lost" xml:space="preserve">
+        <value>Vous avez perdu votre connexion. Veuillez réessayer.</value>
+    </data>
+    <data name="Error_Generic" xml:space="preserve">
+        <value>Une erreur inconnue est survenue, veuillez réessayer plus tard.</value>
+    </data>
+    <data name="Alert_Hello" xml:space="preserve">
+        <value>Salut!</value>
+    </data>
+</root>

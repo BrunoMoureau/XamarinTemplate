@@ -1,4 +1,4 @@
-﻿namespace MAUITemplate;
+﻿namespace MAUI.Template;
 
 public partial class App : Application
 {

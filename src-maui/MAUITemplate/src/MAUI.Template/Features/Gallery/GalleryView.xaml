@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:gallery="clr-namespace:MAUI.Template.Features.Gallery;assembly=MAUI.Template"
+             xmlns:models="clr-namespace:MAUI.Template.Abstractions.Photos.Models;assembly=MAUI.Template.Abstractions"
+             x:Class="MAUI.Template.Features.Gallery.GalleryView"
+             x:DataType="{x:Type gallery:GalleryViewModel}">
+
+    <VerticalStackLayout>
+        <ActivityIndicator
+            IsVisible="{Binding IsGalleryLoading}"
+            IsRunning="{Binding IsGalleryLoading}"/>
+        
+        <CollectionView ItemsSource="{Binding Photos}"
+                        ItemSizingStrategy="MeasureFirstItem">
+            
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10"
+                                   Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+        
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type models:Photo}">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="{Binding ThumbnailUrl}"
+                               Aspect="AspectFit"
+                               HeightRequest="50"
+                               WidthRequest="50"/>
+                        
+                        <Label Text="{Binding Title}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

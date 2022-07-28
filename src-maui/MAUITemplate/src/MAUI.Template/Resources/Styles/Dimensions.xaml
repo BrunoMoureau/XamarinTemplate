@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xaml-comp compile="true" ?>
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- LINE HEIGHTS -->
+    <!-- <x:Double x:Key="TitleLineHeight">1</x:Double> -->
+
+
+    <!-- FONT SIZES -->
+    <!-- <x:Double x:Key="TitleFontSize">24</x:Double> -->
+
+
+    <!-- SIZES -->
+    <!-- <x:Double x:Key="CheckboxHeight">22</x:Double> -->
+
+
+    <!-- RADIUS -->
+    <!-- <x:Int32 x:Key="ButtonCornerRadius">15</x:Int32> -->
+
+
+    <!-- MARGINS -->
+    <!-- <Thickness x:Key="DividerMargin">0,0,0,45</Thickness> -->
+
+
+    <!-- PADDING -->
+    <!-- <Thickness x:Key="BaseButtonPadding">20,0</Thickness> -->
+</ResourceDictionary>
