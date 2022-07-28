@@ -46,4 +46,9 @@
 	  <ProjectReference Include="..\MAUI.Template.Api\MAUI.Template.Api.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Resources\Fonts\" />
+	  <Folder Include="Resources\Images\" />
+	</ItemGroup>
+
 </Project>
