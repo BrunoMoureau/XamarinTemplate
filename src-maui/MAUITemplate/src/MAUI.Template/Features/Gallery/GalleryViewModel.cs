@@ -52,7 +52,7 @@ namespace MAUI.Template.Features.Gallery
             try
             {
                 var photos = await _getPhotosTask.RunAsync(c => _photoService.GetPhotosAsync(c));
-                Photos.ReplaceRange(photos);
+                Photos.ReplaceRange(photos.Take(11));
             }
             catch (OperationCanceledException)
             {

@@ -99,4 +99,10 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Reference Include="Microsoft.iOS">
+	    <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\packs\Microsoft.iOS.Ref\15.4.430\ref\net6.0\Microsoft.iOS.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
 </Project>

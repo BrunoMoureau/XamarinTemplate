@@ -16,16 +16,15 @@ using MAUI.Basics.Services.Toasts;
 using MAUI.Basics.Settings;
 using MAUI.Template.Abstractions.Photos;
 using MAUI.Template.Api.Collections.Photos.Factories;
+using MAUI.Template.Dependencies;
 using MAUI.Template.Repositories.Photos;
 using MAUI.Template.Services.Alerts;
-using MAUI.Template.Services.HttpMessageHandlers;
 using MAUI.Template.Services.Languages;
 using MAUI.Template.Services.Loggers;
 using MAUI.Template.Services.Messagings;
 using MAUI.Template.Services.Navigations;
 using MAUI.Template.Services.Toasts;
 using MAUI.Template.Settings;
-using Microsoft.Maui.Controls;
 
 namespace MAUI.Template.Services.Containers
 {
@@ -82,7 +81,12 @@ namespace MAUI.Template.Services.Containers
 
             var baseApiUrl = "https://jsonplaceholder.typicode.com/";
             _container.Register<ApiFactory>(Reuse.Singleton);
-            _container.RegisterDelegate(_ => DependencyService.Resolve<IHttpMessageHandlerService>().Create());
+            _container.RegisterDelegate(_ =>
+            {
+                var httpClientHandler = new HttpMessageHandlerService();
+                return httpClientHandler.Create();
+            });
+
             _container.RegisterDelegate(c => c.Resolve<ApiFactory>().CreatePhotoApi(baseApiUrl));
 
             #endregion
