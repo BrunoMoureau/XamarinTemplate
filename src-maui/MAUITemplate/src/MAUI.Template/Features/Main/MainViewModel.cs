@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MAUI.Basics.Mvvm.Navigations.Interfaces;
 using MAUI.Basics.Mvvm.ViewModels;
 using MAUI.Template.Features.Gallery;
@@ -10,16 +12,16 @@ namespace MAUI.Template.Features.Main
     public class MainViewModel : ObservableObject, IViewModel
     {
         private readonly INavigationService _navigationService;
-        public AsyncCommand GalleryCommand { get; }
-        public AsyncCommand MessagingCommand { get; }
-        public AsyncCommand LanguageCommand { get; }
+        public IAsyncRelayCommand GalleryCommand { get; }
+        public IAsyncRelayCommand MessagingCommand { get; }
+        public IAsyncRelayCommand LanguageCommand { get; }
 
         public MainViewModel(INavigationService navigationService) 
         {
             _navigationService = navigationService;
-            GalleryCommand = new AsyncCommand(OpenGalleryAsync, allowsMultipleExecutions: false);
-            MessagingCommand = new AsyncCommand(OpenMessagingAsync, allowsMultipleExecutions: false);
-            LanguageCommand = new AsyncCommand(OpenLanguageAsync, allowsMultipleExecutions: false);
+            GalleryCommand = new AsyncRelayCommand(OpenGalleryAsync);
+            MessagingCommand = new AsyncRelayCommand(OpenMessagingAsync);
+            LanguageCommand = new AsyncRelayCommand(OpenLanguageAsync);
         }
 
         public void Load()

@@ -1,5 +1,6 @@
 ﻿using MAUI.Basics.Mvvm.Navigations.Factories;
 using MAUI.Template.Services.Containers;
+using IView = MAUI.Basics.Mvvm.Views.IView;
 
 namespace MAUI.Template.Services.Navigations
 {

@@ -8,6 +8,8 @@ namespace MAUI.Template;
 
 public static class MauiProgram
 {
+	private static AppContainer _appContainer;
+
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
@@ -15,16 +17,19 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit();
-		
-		var appContainer = new AppContainer();
-		appContainer.Initialize();
+
+        _appContainer = new AppContainer();
+        _appContainer.Initialize();
             
-		var languageService = appContainer.Resolve<ILanguageService>();
+		var languageService = _appContainer.Resolve<ILanguageService>();
 		languageService.Initialize();
-            
-		var navigationService = appContainer.Resolve<INavigationService>();
-		navigationService.SetStackRootAsync<MainView>();
 		
 		return builder.Build();
 	}
+
+	public static void NavigateToFirstPage()
+	{
+        var navigationService = _appContainer.Resolve<INavigationService>();
+        navigationService.SetStackRootAsync<MainView>();
+    }
 }

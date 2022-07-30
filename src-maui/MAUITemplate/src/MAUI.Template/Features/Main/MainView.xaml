@@ -3,18 +3,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:main="clr-namespace:MAUI.Template.Features.Main;assembly=MAUI.Template"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:markups="clr-namespace:MAUI.Template.Markups;assembly=MAUI.Template"
              x:Class="MAUI.Template.Features.Main.MainView"
              x:DataType="{x:Type main:MainViewModel}">
 
     <StackLayout>
-        <Button Text="{xct:Translate Action_Show_Gallery}"
+        <Button Text="{markups:Translate Action_Show_Gallery}"
                 Command="{Binding GalleryCommand}" />
         
-        <Button Text="{xct:Translate Action_Show_Messaging}"
+        <Button Text="{markups:Translate Action_Show_Messaging}"
                 Command="{Binding MessagingCommand}" />
         
-        <Button Text="{xct:Translate Action_Show_Language}"
+        <Button Text="{markups:Translate Action_Show_Language}"
                 Command="{Binding LanguageCommand}" />
     </StackLayout>
 </ContentPage>

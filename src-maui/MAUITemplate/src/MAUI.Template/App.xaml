@@ -3,7 +3,7 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MAUITemplate"
-             x:Class="MAUITemplate.App">
+             x:Class="MAUI.Template.App">
 
     <Application.Resources>
         <!-- Merged dictionaries -->

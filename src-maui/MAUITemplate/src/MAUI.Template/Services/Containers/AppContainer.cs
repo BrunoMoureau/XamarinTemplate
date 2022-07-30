@@ -94,7 +94,7 @@ namespace MAUI.Template.Services.Containers
 
         private Container CreateContainer()
         {
-            if (Device.RuntimePlatform == Device.iOS)
+            if (DeviceInfo.Current.Platform == DevicePlatform.iOS)
             {
                 // Without this rule, the iOS app crashes.
                 // https://github.com/dadhi/DryIoc/issues/156

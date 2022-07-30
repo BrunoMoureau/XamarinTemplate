@@ -3,16 +3,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:language="clr-namespace:MAUI.Template.Features.Language;assembly=MAUI.Template"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:markups="clr-namespace:MAUI.Template.Markups;assembly=MAUI.Template"
              x:Class="MAUI.Template.Features.Language.LanguageView"
              x:DataType="{x:Type language:LanguageViewModel}">
 
     <StackLayout>
-        <Button Text="{xct:Translate Lang_EN}"
+        <Button Text="{markups:Translate Lang_EN}"
                 Command="{Binding SetCultureCommand}"
                 CommandParameter="EN"/>
         
-        <Button Text="{xct:Translate Lang_FR}"
+        <Button Text="{markups:Translate Lang_FR}"
                 Command="{Binding SetCultureCommand}"
                 CommandParameter="FR" />
     </StackLayout>

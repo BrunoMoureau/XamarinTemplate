@@ -3,18 +3,19 @@ using MAUI.Basics.Mvvm.ViewModels;
 using MAUI.Basics.Services.Messagings;
 using MAUI.Template.Features.Messaging.Messages;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 
 namespace MAUI.Template.Features.Messaging
 {
     public class MessagingViewModel : ObservableObject, IViewModel
     {
         private readonly IMessageService _messageService;
-        public ICommand SendMessageCommand { get; }
+        public IRelayCommand SendMessageCommand { get; }
 
         public MessagingViewModel(IMessageService messageService) 
         {
             _messageService = messageService;
-            SendMessageCommand = new Command(SendMessage);
+            SendMessageCommand = new RelayCommand(SendMessage);
         }
 
         public void Load()
