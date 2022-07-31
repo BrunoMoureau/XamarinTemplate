@@ -7,11 +7,10 @@
              x:Class="MAUI.Template.Features.Gallery.GalleryView"
              x:DataType="{x:Type gallery:GalleryViewModel}">
 
-    <VerticalStackLayout>
-        <ActivityIndicator
-            IsVisible="{Binding IsGalleryLoading}"
-            IsRunning="{Binding IsGalleryLoading}"/>
-        
+    <RefreshView
+        IsRefreshing="{Binding RefreshCommand.IsRunning}"
+        Command="{Binding RefreshCommand}">
+                
         <CollectionView ItemsSource="{Binding Photos}"
                         ItemSizingStrategy="MeasureFirstItem">
             
@@ -33,5 +32,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </VerticalStackLayout>
+    </RefreshView>
 </ContentPage>

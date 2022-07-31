@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MAUI.Basics.Extensions.Tasks;
 using MAUI.Basics.Mvvm.Collections;
 using MAUI.Basics.Mvvm.ViewModels;
@@ -19,21 +20,17 @@ namespace MAUI.Template.Features.Gallery
         private readonly ILoggerService _loggerService;
         private readonly BackgroundTask _getPhotosTask = new();
 
-        private bool _isGalleryLoading;
-
-        public bool IsGalleryLoading
-        {
-            get => _isGalleryLoading;
-            set => SetProperty(ref _isGalleryLoading, value);
-        }
-
         public ObservableRangeCollection<Photo> Photos { get; } = new();
+
+        public IAsyncRelayCommand RefreshCommand { get; }
 
         public GalleryViewModel(IPhotoService photoService, IToastService toastService, ILoggerService loggerService)
         {
             _photoService = photoService;
             _toastService = toastService;
             _loggerService = loggerService;
+
+            RefreshCommand = new AsyncRelayCommand(LoadGalleryAsync, () => RefreshCommand.IsRunning == false);
         }
 
         public void Load()
@@ -42,17 +39,15 @@ namespace MAUI.Template.Features.Gallery
 
         public Task InitializeAsync(object @params)
         {
-            return LoadGalleryAsync();
+            return RefreshCommand.ExecuteAsync(null);
         }
 
         private async Task LoadGalleryAsync()
         {
-            IsGalleryLoading = true;
-
             try
             {
                 var photos = await _getPhotosTask.RunAsync(c => _photoService.GetPhotosAsync(c));
-                Photos.ReplaceRange(photos.Take(11));
+                Photos.ReplaceRange(photos);
             }
             catch (OperationCanceledException)
             {
@@ -69,10 +64,6 @@ namespace MAUI.Template.Features.Gallery
             {
                 _loggerService.Log(exception);
                 _toastService.ShowAsync(AppResources.Error_Generic).FireAndForgetSafeAsync();
-            }
-            finally
-            {
-                IsGalleryLoading = false;
             }
         }
 
