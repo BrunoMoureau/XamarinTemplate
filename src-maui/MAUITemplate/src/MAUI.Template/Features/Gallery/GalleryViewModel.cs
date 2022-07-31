@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using MAUI.Basics.Extensions.Tasks;
 using MAUI.Basics.Mvvm.Collections;
 using MAUI.Basics.Mvvm.ViewModels;
-using MAUI.Basics.Services;
 using MAUI.Basics.Services.Loggers;
 using MAUI.Basics.Services.Toasts;
 using MAUI.Template.Abstractions.Photos;
@@ -18,7 +17,6 @@ namespace MAUI.Template.Features.Gallery
         private readonly IPhotoService _photoService;
         private readonly IToastService _toastService;
         private readonly ILoggerService _loggerService;
-        private readonly BackgroundTask _getPhotosTask = new();
 
         public ObservableRangeCollection<Photo> Photos { get; } = new();
 
@@ -42,11 +40,14 @@ namespace MAUI.Template.Features.Gallery
             return RefreshCommand.ExecuteAsync(null);
         }
 
-        private async Task LoadGalleryAsync()
+        private async Task LoadGalleryAsync(CancellationToken cancellationToken)
         {
             try
             {
-                var photos = await _getPhotosTask.RunAsync(c => _photoService.GetPhotosAsync(c));
+                var photos = await Task.Run(() => 
+                    _photoService.GetPhotosAsync(cancellationToken),
+                    cancellationToken);
+                
                 Photos.ReplaceRange(photos);
             }
             catch (OperationCanceledException)
@@ -69,7 +70,7 @@ namespace MAUI.Template.Features.Gallery
 
         public void Unload()
         {
-            _getPhotosTask.Cancel();
+            RefreshCommand.Cancel();
         }
     }
 }
