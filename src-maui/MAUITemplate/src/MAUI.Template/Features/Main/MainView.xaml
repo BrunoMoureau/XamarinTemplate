@@ -7,7 +7,10 @@
              x:Class="MAUI.Template.Features.Main.MainView"
              x:DataType="{x:Type main:MainViewModel}">
 
-    <StackLayout>
+    <VerticalStackLayout
+        Padding="15"
+        Spacing="10">
+      
         <Button Text="{markups:Translate Action_Show_Gallery}"
                 Command="{Binding GalleryCommand}" />
         
@@ -16,5 +19,5 @@
         
         <Button Text="{markups:Translate Action_Show_Language}"
                 Command="{Binding LanguageCommand}" />
-    </StackLayout>
+    </VerticalStackLayout>
 </ContentPage>

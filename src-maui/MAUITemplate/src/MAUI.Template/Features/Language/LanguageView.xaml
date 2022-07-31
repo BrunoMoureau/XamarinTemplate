@@ -7,7 +7,10 @@
              x:Class="MAUI.Template.Features.Language.LanguageView"
              x:DataType="{x:Type language:LanguageViewModel}">
 
-    <StackLayout>
+    <VerticalStackLayout
+        Padding="15"
+        Spacing="10">
+      
         <Button Text="{markups:Translate Lang_EN}"
                 Command="{Binding SetCultureCommand}"
                 CommandParameter="EN"/>
@@ -15,5 +18,5 @@
         <Button Text="{markups:Translate Lang_FR}"
                 Command="{Binding SetCultureCommand}"
                 CommandParameter="FR" />
-    </StackLayout>
+    </VerticalStackLayout>
 </ContentPage>

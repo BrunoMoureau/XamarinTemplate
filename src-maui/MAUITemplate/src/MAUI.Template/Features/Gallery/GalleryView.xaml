@@ -13,22 +13,19 @@
                 
         <CollectionView ItemsSource="{Binding Photos}"
                         ItemSizingStrategy="MeasureFirstItem">
-            
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout ItemSpacing="10"
-                                   Orientation="Vertical"/>
-            </CollectionView.ItemsLayout>
         
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type models:Photo}">
-                    <StackLayout Orientation="Horizontal">
+                    <HorizontalStackLayout Padding="15"
+                                           Spacing="10">
+                      
                         <Image Source="{Binding ThumbnailUrl}"
                                Aspect="AspectFit"
                                HeightRequest="50"
                                WidthRequest="50"/>
                         
-                        <Label Text="{Binding Title}" />
-                    </StackLayout>
+                        <Label Text="{Binding Title}"/>
+                    </HorizontalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
