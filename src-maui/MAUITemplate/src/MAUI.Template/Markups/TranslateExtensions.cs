@@ -5,12 +5,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 namespace MAUI.Template.Markups
 {
     [ContentProperty(nameof(Key))]
-    public class TranslateExtension : IMarkupExtension
+    public class TranslateExtension : IMarkupExtension<BindingBase>
     {
         public string Key { get; set; } = string.Empty;
         public string StringFormat { get; set; }
         
-        public object ProvideValue(IServiceProvider serviceProvider)
+        public BindingBase ProvideValue(IServiceProvider serviceProvider)
         {
             var binding = new Binding
             {
