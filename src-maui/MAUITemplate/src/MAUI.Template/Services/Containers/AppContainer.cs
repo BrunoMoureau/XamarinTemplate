@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using DryIoc;
+﻿using System.Reflection;
 using MAUI.Basics.Mvvm.Navigations;
+using MAUI.Basics.Mvvm.Navigations.Controllers.Interfaces;
 using MAUI.Basics.Mvvm.Navigations.Factories;
 using MAUI.Basics.Mvvm.Navigations.Interfaces;
 using MAUI.Basics.Mvvm.Navigations.Services;
@@ -28,97 +25,97 @@ using MAUI.Template.Settings;
 
 namespace MAUI.Template.Services.Containers
 {
-    public interface IAppContainer
+    public class AppContainer
     {
-        TResult Resolve<TResult>();
-    }
-
-    public class AppContainer : IAppContainer
-    {
-        private Container _container;
         private readonly Assembly _assembly = Assembly.GetExecutingAssembly();
 
-        public void Initialize()
+        public void Initialize(IServiceCollection services)
         {
-            _container = CreateContainer();
-            
             #region MVVM
 
             var viewTypes = GetViewTypes();
-            _container.RegisterMany(viewTypes);
+            foreach (var viewType in viewTypes)
+            {
+                services.AddScoped(viewType);
+            }
 
             var viewModelTypes = GetViewModelTypes();
-            _container.RegisterMany(viewModelTypes);
+            foreach (var viewModelType in viewModelTypes)
+            {
+                services.AddScoped(viewModelType);
+            }
 
-            _container.Register<IViewFactory, ViewFactory>();
+            services.AddScoped<IViewFactory, ViewFactory>();
 
             #endregion
 
             #region Settings
 
-            var appSettings = new AppSettings(_assembly);
-            _container.RegisterInstance(appSettings.Get<EnvironmentSettings>("Environment"));
+            services.AddScoped(_ =>
+            {
+                var appSettings = new AppSettings(_assembly);
+                return appSettings.Get<EnvironmentSettings>("Environment");
+            });
 
             #endregion
 
             #region Services
 
-            _container.Register<IAlertService, AlertService>();
-            _container.Register<ILanguageService, LanguageService>();
-            _container.Register<ILoggerService, LoggerService>();
-            _container.Register<IMessageService, MessageService>();
-            _container.Register<INavigationService, NavigationService>();
-            _container.RegisterMany<NavigationController>(Reuse.Singleton);
-            _container.Register<IToastService, ToastService>();
+            services.AddScoped<IAlertService, AlertService>();
+            services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<ILoggerService, LoggerService>();
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IToastService, ToastService>();
+            
+            services.AddScoped<INavigationService, NavigationService>();
+            services.AddScoped<IAppNavigationService, AppNavigationService>();
+            
+            services.AddSingleton<NavigationController>();
+            services.AddSingleton<INavigationController>(s => s.GetRequiredService<NavigationController>());
+            services.AddSingleton<INavigationCallback>(s => s.GetRequiredService<NavigationController>());
 
-            _container.Register<IAppNavigationService, AppNavigationService>();
-
-            _container.Register<IPhotoService, PhotoService>();
+            services.AddScoped<IPhotoService, PhotoService>();
 
             #endregion
 
             #region Api
 
             var baseApiUrl = "https://jsonplaceholder.typicode.com/";
-            _container.Register<ApiFactory>(Reuse.Singleton);
-            _container.RegisterDelegate(_ =>
+
+            services.AddScoped<ApiFactory>();
+            services.AddScoped(_ =>
             {
                 var httpClientHandler = new HttpMessageHandlerService();
                 return httpClientHandler.Create();
             });
 
-            _container.RegisterDelegate(c => c.Resolve<ApiFactory>().CreatePhotoApi(baseApiUrl));
+            services.AddScoped(sp =>
+            {
+                var apiFactory = sp.GetRequiredService<ApiFactory>();
+                return apiFactory.CreatePhotoApi(baseApiUrl);
+            });
 
             #endregion
 
-            _container.RegisterInstance<IAppContainer>(this);
+            //services.AddSingleton<IAppContainer>(this);
         }
-
-        public TResult Resolve<TResult>() => _container.Resolve<TResult>();
-
-        private Container CreateContainer()
-        {
-            if (DeviceInfo.Current.Platform == DevicePlatform.iOS)
-            {
-                // Without this rule, the iOS app crashes.
-                // https://github.com/dadhi/DryIoc/issues/156
-                return new(rules => rules.WithUseInterpretation());
-            }
-
-            return new();
-        }
-
+        
         private IEnumerable<Type> GetViewModelTypes() =>
-            _assembly.GetTypes().Where(IsClassWithViewModelInterface).ToArray();
+            _assembly.GetTypes()
+                .Where(IsClassWithViewModelInterface)
+                .ToArray();
 
-        private IEnumerable<Type> GetViewTypes() => 
-            _assembly.GetTypes().Where(IsClassWithViewInterface).ToArray();
+        private IEnumerable<Type> GetViewTypes() =>
+            _assembly.GetTypes()
+                .Where(IsClassWithViewInterface)
+                .ToArray();
 
         private static bool IsClassWithViewInterface(Type type) =>
-            typeof(IView).IsAssignableFrom((Type)type) && type.IsClass;
+            typeof(IView).IsAssignableFrom(type) && type.IsClass;
 
         private static bool IsClassWithViewModelInterface(Type type) =>
-            (typeof(IViewModel).IsAssignableFrom(type) || typeof(IViewModel<>).IsAssignableFrom(type)) &&
-            type.IsClass && !type.IsAbstract;
+            (typeof(IViewModel).IsAssignableFrom(type) || typeof(IViewModel<>).IsAssignableFrom(type)) 
+            && type.IsClass 
+            && !type.IsAbstract;
     }
 }

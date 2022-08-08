@@ -63,7 +63,6 @@
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Maui" Version="1.2.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
-	  <PackageReference Include="DryIoc" Version="5.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>

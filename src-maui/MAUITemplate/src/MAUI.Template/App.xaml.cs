@@ -3,7 +3,7 @@ using MAUI.Template.Features.Main;
 
 namespace MAUI.Template;
 
-public partial class App : Application
+public partial class App
 {
 	public App(INavigationService navigationService)
 	{

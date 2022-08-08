@@ -2,7 +2,6 @@
 using MAUI.Basics.Mvvm.ViewModels;
 using MAUI.Basics.Services.Messagings;
 using MAUI.Template.Features.Messaging.Messages;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
 namespace MAUI.Template.Features.Messaging

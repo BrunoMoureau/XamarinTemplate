@@ -1,18 +1,17 @@
 ﻿using MAUI.Basics.Mvvm.Navigations.Factories;
-using MAUI.Template.Services.Containers;
 using IView = MAUI.Basics.Mvvm.Views.IView;
 
 namespace MAUI.Template.Services.Navigations
 {
     public class ViewFactory : IViewFactory
     {
-        private readonly IAppContainer _appContainer;
+        private readonly IServiceProvider _serviceProvider;
 
-        public ViewFactory(IAppContainer appContainer)
+        public ViewFactory(IServiceProvider serviceProvider)
         {
-            _appContainer = appContainer;
+            _serviceProvider = serviceProvider;
         }
         
-        public TView Create<TView>() where TView : IView => _appContainer.Resolve<TView>();
+        public TView Create<TView>() where TView : IView => _serviceProvider.GetService<TView>();
     }
 }
