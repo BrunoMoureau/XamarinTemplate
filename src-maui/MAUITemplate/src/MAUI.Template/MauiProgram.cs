@@ -6,8 +6,6 @@ namespace MAUI.Template;
 
 public static class MauiProgram
 {
-	private static AppContainer _appContainer;
-
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
@@ -16,14 +14,9 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit();
 
-		_appContainer = new AppContainer();
-		_appContainer.Initialize(builder.Services);
+		var appContainer = new AppContainer();
+		appContainer.Initialize(builder.Services);
 
-		var app = builder.Build();
-
-		var languageService = app.Services.GetRequiredService<ILanguageService>();
-		languageService.Initialize();
-		
-		return app;
+		return builder.Build();
 	}
 }
