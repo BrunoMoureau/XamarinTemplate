@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace MAUITemplate;
+namespace MAUI.Template;
 
 public class Program
 {

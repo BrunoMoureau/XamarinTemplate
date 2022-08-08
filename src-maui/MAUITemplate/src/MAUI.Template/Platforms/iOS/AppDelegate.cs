@@ -1,7 +1,7 @@
 ﻿using Foundation;
 using MAUI.Template;
 
-namespace MAUITemplate;
+namespace MAUI.Template;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

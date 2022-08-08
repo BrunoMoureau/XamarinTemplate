@@ -9,10 +9,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>MAUITemplate</ApplicationTitle>
+		<ApplicationTitle>MAUI.Template</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.mauitemplate</ApplicationId>
+		<ApplicationId>com.companyname.MAUI.Template</ApplicationId>
 		<ApplicationIdGuid>4E67ECE0-4876-433D-878C-02FDFDCD5D46</ApplicationIdGuid>
 
 		<!-- Versions -->

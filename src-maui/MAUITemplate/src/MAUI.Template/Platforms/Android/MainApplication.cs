@@ -2,7 +2,7 @@
 using Android.Runtime;
 using MAUI.Template;
 
-namespace MAUITemplate;
+namespace MAUI.Template;
 
 [Application]
 public class MainApplication : MauiApplication
