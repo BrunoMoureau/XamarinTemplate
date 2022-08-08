@@ -1,10 +1,13 @@
-﻿namespace MAUI.Template;
+﻿using MAUI.Basics.Mvvm.Navigations.Interfaces;
+using MAUI.Template.Features.Main;
+
+namespace MAUI.Template;
 
 public partial class App : Application
 {
-	public App()
+	public App(INavigationService navigationService)
 	{
 		InitializeComponent();
-		MauiProgram.NavigateToFirstPage();
+		navigationService.SetStackRootAsync<MainView>();
     }
 }
