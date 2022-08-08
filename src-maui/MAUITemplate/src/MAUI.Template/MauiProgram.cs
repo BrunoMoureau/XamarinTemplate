@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Maui;
-using MAUI.Basics.Services.Languages;
 using MAUI.Template.Services.Containers;
 
 namespace MAUI.Template;

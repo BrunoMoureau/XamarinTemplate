@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Runtime;
-using MAUI.Template;
 
 namespace MAUI.Template;
 

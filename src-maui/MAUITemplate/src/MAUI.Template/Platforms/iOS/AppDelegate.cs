@@ -1,5 +1,4 @@
 ﻿using Foundation;
-using MAUI.Template;
 
 namespace MAUI.Template;
 
