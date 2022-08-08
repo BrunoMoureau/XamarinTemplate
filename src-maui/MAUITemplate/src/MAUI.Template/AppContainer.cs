@@ -23,23 +23,23 @@ using MAUI.Template.Services.Navigations;
 using MAUI.Template.Services.Toasts;
 using MAUI.Template.Settings;
 
-namespace MAUI.Template.Services.Containers
+namespace MAUI.Template
 {
-    public class AppContainer
+    public static class AppContainer
     {
-        private readonly Assembly _assembly = Assembly.GetExecutingAssembly();
-
-        public void Initialize(IServiceCollection services)
+        public static void Initialize(IServiceCollection services)
         {
+            var assembly = Assembly.GetExecutingAssembly();
+            
             #region MVVM
 
-            var viewTypes = GetViewTypes();
+            var viewTypes = GetViewTypes(assembly);
             foreach (var viewType in viewTypes)
             {
                 services.AddScoped(viewType);
             }
 
-            var viewModelTypes = GetViewModelTypes();
+            var viewModelTypes = GetViewModelTypes(assembly);
             foreach (var viewModelType in viewModelTypes)
             {
                 services.AddScoped(viewModelType);
@@ -53,7 +53,7 @@ namespace MAUI.Template.Services.Containers
 
             services.AddScoped(_ =>
             {
-                var appSettings = new AppSettings(_assembly);
+                var appSettings = new AppSettings(assembly);
                 return appSettings.Get<EnvironmentSettings>("Environment");
             });
 
@@ -96,17 +96,15 @@ namespace MAUI.Template.Services.Containers
             });
 
             #endregion
-
-            //services.AddSingleton<IAppContainer>(this);
         }
         
-        private IEnumerable<Type> GetViewModelTypes() =>
-            _assembly.GetTypes()
+        private static IEnumerable<Type> GetViewModelTypes(Assembly assembly) =>
+            assembly.GetTypes()
                 .Where(IsClassWithViewModelInterface)
                 .ToArray();
 
-        private IEnumerable<Type> GetViewTypes() =>
-            _assembly.GetTypes()
+        private static IEnumerable<Type> GetViewTypes(Assembly assembly) =>
+            assembly.GetTypes()
                 .Where(IsClassWithViewInterface)
                 .ToArray();
 

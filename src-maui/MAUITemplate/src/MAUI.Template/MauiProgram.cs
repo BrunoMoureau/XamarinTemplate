@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Maui;
-using MAUI.Template.Services.Containers;
 
 namespace MAUI.Template;
 
@@ -13,8 +12,7 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit();
 
-		var appContainer = new AppContainer();
-		appContainer.Initialize(builder.Services);
+		AppContainer.Initialize(builder.Services);
 
 		return builder.Build();
 	}
