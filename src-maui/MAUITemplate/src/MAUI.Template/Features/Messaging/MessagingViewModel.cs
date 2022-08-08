@@ -9,11 +9,13 @@ namespace MAUI.Template.Features.Messaging
     public class MessagingViewModel : ObservableObject, IViewModel
     {
         private readonly IMessageService _messageService;
+
         public IRelayCommand SendMessageCommand { get; }
 
         public MessagingViewModel(IMessageService messageService) 
         {
             _messageService = messageService;
+
             SendMessageCommand = new RelayCommand(SendMessage);
         }
 

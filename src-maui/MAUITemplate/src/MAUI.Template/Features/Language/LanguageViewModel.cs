@@ -8,6 +8,7 @@ namespace MAUI.Template.Features.Language
     public class LanguageViewModel : ObservableObject, IViewModel
     {
         private readonly ILanguageService _languageService;
+
         public ICommand SetCultureCommand { get; }
 
         public LanguageViewModel(ILanguageService languageService) 
