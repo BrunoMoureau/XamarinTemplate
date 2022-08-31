@@ -2,14 +2,15 @@
 using System.Reflection;
 using System.Text.Json;
 using MAUI.Basics.Extensions.Jsons;
+using MAUI.Basics.Services.Settings;
 
 namespace MAUI.Basics.Settings
 {
-    public class AppSettings
+    public class SettingsService : ISettingsService
     {
         private readonly JsonElement _jsonElement;
 
-        public AppSettings(Assembly assembly)
+        public SettingsService(Assembly assembly)
         {
             try
             {
@@ -18,12 +19,13 @@ namespace MAUI.Basics.Settings
             }
             catch (Exception)
             {
-                Debug.WriteLine("Unable to load configuration file");
+                Debug.WriteLine($"Unable to load AppSettings file from assembly {assembly?.FullName}");
             }
         }
 
         private string GetAppSettingsFilePath(Assembly assembly) => 
-            assembly.GetManifestResourceNames()
+            assembly
+                .GetManifestResourceNames()
                 .FirstOrDefault(r => r.EndsWith("appsettings.json", StringComparison.OrdinalIgnoreCase));
 
         private JsonElement GetAppSettingsAsJson(Assembly assembly, string resourceName)
@@ -35,6 +37,20 @@ namespace MAUI.Basics.Settings
             return document.RootElement.Clone();
         }
 
-        public T Get<T>(string propertyName) => _jsonElement.GetProperty(propertyName).ToObject<T>();
+        public T Get<T>(string propertyName) where T : ISettings
+        {
+            return _jsonElement
+                .GetProperty(propertyName)
+                .ToObject<T>();
+        }
+
+        public T Get<T>(T settings) where T : ISettings
+        {
+            var sectionName = settings.SectionName;
+
+            return _jsonElement
+                .GetProperty(sectionName)
+                .ToObject<T>();
+        }
     }
 }

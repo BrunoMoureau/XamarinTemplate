@@ -9,6 +9,7 @@ using MAUI.Basics.Services.Alerts;
 using MAUI.Basics.Services.Languages;
 using MAUI.Basics.Services.Loggers;
 using MAUI.Basics.Services.Messagings;
+using MAUI.Basics.Services.Settings;
 using MAUI.Basics.Services.Toasts;
 using MAUI.Basics.Settings;
 using MAUI.Template.Abstractions.Photos;
@@ -51,11 +52,17 @@ namespace MAUI.Template
 
             #region Settings
 
-            services.AddScoped(_ =>
+            services.AddScoped<ISettingsService>(_ => new SettingsService(assembly));
+
+            var settingsTypes = GetSettingsTypes(assembly);
+            foreach (var settingsType in settingsTypes)
             {
-                var appSettings = new AppSettings(assembly);
-                return appSettings.Get<EnvironmentSettings>("Environment");
-            });
+                services.AddScoped(sp => 
+                {
+                    var appSettingsService = sp.GetRequiredService<ISettingsService>();
+                    return appSettingsService.Get(settingsType);
+                });
+            }
 
             #endregion
 
@@ -108,6 +115,12 @@ namespace MAUI.Template
                 .Where(IsClassWithViewInterface)
                 .ToArray();
 
+        private static IEnumerable<ISettings> GetSettingsTypes(Assembly assembly) =>
+            assembly.GetTypes()
+                .Where(IsClassWithSettingsInterface)
+                .OfType<ISettings>()
+                .ToArray();
+
         private static bool IsClassWithViewInterface(Type type) =>
             typeof(IView).IsAssignableFrom(type) && type.IsClass;
 
@@ -115,5 +128,8 @@ namespace MAUI.Template
             (typeof(IViewModel).IsAssignableFrom(type) || typeof(IViewModel<>).IsAssignableFrom(type)) 
             && type.IsClass 
             && !type.IsAbstract;
+
+        private static bool IsClassWithSettingsInterface(Type type) =>
+            typeof(ISettings).IsAssignableFrom(type) && type.IsClass;
     }
 }

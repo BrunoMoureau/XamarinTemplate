@@ -58,6 +58,7 @@
 	<ItemGroup>
 	  <Folder Include="Resources\Fonts\" />
 	  <Folder Include="Resources\Images\" />
+	  <Folder Include="Settings\Abstracts\" />
 	</ItemGroup>
 
 	<ItemGroup>
