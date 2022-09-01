@@ -37,19 +37,10 @@ namespace MAUI.Basics.Settings
             return document.RootElement.Clone();
         }
 
-        public T Get<T>(string propertyName) where T : ISettings
+        public T Get<T>(string propertyName)
         {
             return _jsonElement
                 .GetProperty(propertyName)
-                .ToObject<T>();
-        }
-
-        public T Get<T>(T settings) where T : ISettings
-        {
-            var sectionName = settings.SectionName;
-
-            return _jsonElement
-                .GetProperty(sectionName)
                 .ToObject<T>();
         }
     }

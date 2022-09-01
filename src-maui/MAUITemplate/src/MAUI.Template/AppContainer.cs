@@ -57,10 +57,10 @@ namespace MAUI.Template
             var settingsTypes = GetSettingsTypes(assembly);
             foreach (var settingsType in settingsTypes)
             {
-                services.AddScoped(sp => 
+                services.AddScoped((sp) =>
                 {
-                    var appSettingsService = sp.GetRequiredService<ISettingsService>();
-                    return appSettingsService.Get(settingsType);
+                    var settingsService = sp.GetRequiredService<ISettingsService>();
+                    return settingsService.Get(settingsType, "Environment");
                 });
             }
 
@@ -115,10 +115,9 @@ namespace MAUI.Template
                 .Where(IsClassWithViewInterface)
                 .ToArray();
 
-        private static IEnumerable<ISettings> GetSettingsTypes(Assembly assembly) =>
+        private static IEnumerable<Type> GetSettingsTypes(Assembly assembly) =>
             assembly.GetTypes()
                 .Where(IsClassWithSettingsInterface)
-                .OfType<ISettings>()
                 .ToArray();
 
         private static bool IsClassWithViewInterface(Type type) =>

@@ -2,12 +2,11 @@
 {
     public interface ISettings
     {
-        string SectionName { get; }
     }
 
     public interface ISettingsService
     {
-        public T Get<T>(string propertyName) where T : ISettings;
-        public T Get<T>(T settings) where T : ISettings;
+        public T Get<T>(string propertyName);
+        public T Get<T>(T type, string propertyName);
     }
 }
